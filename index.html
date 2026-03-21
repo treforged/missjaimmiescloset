@@ -205,6 +205,17 @@
     .review-stars { color: var(--gold); font-size: 1rem; letter-spacing: 0.1em; }
     .review-text { font-size: 0.9rem; line-height: 1.7; color: #555; font-style: italic; flex: 1; }
     .review-author { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #aaa; }
+
+    /* TRE FORGED */
+    .treforged-section{background:var(--cream);padding:4rem 1.25rem;border-top:1px solid rgba(200,120,106,.15);}
+    @media(min-width:768px){.treforged-section{padding:5rem 5vw;}}
+    .treforged-inner{max-width:680px;margin:0 auto;text-align:center;}
+    .treforged-inner h2{margin-bottom:1rem;}
+    .treforged-desc{font-size:.94rem;line-height:1.8;color:#555;margin-bottom:.75rem;}
+    .treforged-discount{display:inline-block;background:rgba(200,120,106,.08);border:1.5px dashed var(--rose);border-radius:8px;padding:.7rem 1.4rem;font-size:.86rem;font-weight:600;color:var(--burgundy);margin:1.25rem 0 2rem;letter-spacing:.01em;}
+    .treforged-discount span{color:var(--rose);}
+    .treforged-btns{display:flex;flex-direction:column;gap:.85rem;align-items:center;}
+    @media(min-width:480px){.treforged-btns{flex-direction:row;justify-content:center;}}
   </style>
 </head>
 <body>
@@ -221,23 +232,23 @@
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Open menu" onclick="toggleMenu()">
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
   <!-- Mobile Drawer -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#shop" onclick="closeMenu()">Shop</a>
-    <a href="#categories" onclick="closeMenu()">What We Carry</a>
-    <a href="#shipping" onclick="closeMenu()">Shipping</a>
-    <a href="#popups" onclick="closeMenu()">Pop-Ups</a>
-    <a href="#reviews" onclick="closeMenu()">Reviews</a>
-    <a href="#about" onclick="closeMenu()">About</a>
-    <a href="#contact" onclick="closeMenu()">Contact</a>
+    <a href="#shop">Shop</a>
+    <a href="#categories">What We Carry</a>
+    <a href="#shipping">Shipping</a>
+    <a href="#popups">Pop-Ups</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
     <div class="mobile-menu-ctas">
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" rel="noopener" class="btn btn-primary" onclick="closeMenu()">Shop Poshmark</a>
-      <a href="https://www.ebay.com/usr/missjaimmiescloset" target="_blank" rel="noopener" class="btn btn-outline" onclick="closeMenu()">Shop eBay</a>
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" rel="noopener" class="btn btn-primary">Shop Poshmark</a>
+      <a href="https://www.ebay.com/usr/missjaimmiescloset" target="_blank" rel="noopener" class="btn btn-outline">Shop eBay</a>
     </div>
   </div>
 
@@ -267,7 +278,7 @@
       <div class="stat-item"><div class="stat-number">2K+</div><div class="stat-label">Active Listings</div></div>
       <div class="stat-item"><div class="stat-number">5K+</div><div class="stat-label">Sales</div></div>
       <div class="stat-item"><div class="stat-number">66K+</div><div class="stat-label">Followers</div></div>
-      <div class="stat-item"><div class="stat-number" style="display:flex;justify-content:center;align-items:center;padding:4px 0;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" style="width:32px;height:16px;border-radius:2px;display:inline-block;vertical-align:middle;"><rect width="60" height="30" fill="#B22234"/><rect y="2.3" width="60" height="2.3" fill="white"/><rect y="6.9" width="60" height="2.3" fill="white"/><rect y="11.5" width="60" height="2.3" fill="white"/><rect y="16.2" width="60" height="2.3" fill="white"/><rect y="20.8" width="60" height="2.3" fill="white"/><rect y="25.4" width="60" height="2.3" fill="white"/><rect width="24" height="16.2" fill="#3C3B6E"/><text x="2" y="6" font-size="4" fill="white">&#9733;&#9733;&#9733;&#9733;&#9733;</text><text x="2" y="10.5" font-size="4" fill="white">&#9733;&#9733;&#9733;&#9733;</text><text x="2" y="15" font-size="4" fill="white">&#9733;&#9733;&#9733;&#9733;&#9733;</text></svg></div><div class="stat-label">Ships US Only</div></div>
+      <div class="stat-item"><div class="stat-number" style="display:flex;justify-content:center;align-items:center;padding:4px 0;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" style="width:32px;height:16px;border-radius:2px;display:block;"><rect width="60" height="30" fill="#B22234"/><rect y="2.3" width="60" height="2.3" fill="white"/><rect y="6.9" width="60" height="2.3" fill="white"/><rect y="11.5" width="60" height="2.3" fill="white"/><rect y="16.2" width="60" height="2.3" fill="white"/><rect y="20.8" width="60" height="2.3" fill="white"/><rect y="25.4" width="60" height="2.3" fill="white"/><rect width="24" height="16.2" fill="#3C3B6E"/><text x="1.5" y="6" font-size="4" fill="white">&#9733;&#9733;&#9733;&#9733;&#9733;</text><text x="1.5" y="10.5" font-size="4" fill="white">&#9733;&#9733;&#9733;&#9733;</text><text x="1.5" y="15" font-size="4" fill="white">&#9733;&#9733;&#9733;&#9733;&#9733;</text></svg></div><div class="stat-label">Ships US Only</div></div>
     </div>
   </section>
 
@@ -433,6 +444,34 @@
     </div>
   </section>
 
+
+  <!-- TRE FORGED -->
+  <section class="treforged-section" id="treforged">
+    <div class="treforged-inner reveal">
+      <div class="section-eyebrow">Powered By</div>
+      <h2>Want Your Own <em>Website?</em></h2>
+      <p class="treforged-desc">
+        This site was built by <strong>TRE Forged</strong> &mdash; a web design and development studio that crafts clean, professional websites for small businesses, entrepreneurs, and personal brands just like yours.
+      </p>
+      <p class="treforged-desc">
+        Whether you need a simple landing page or a full business site, TRE Forged has you covered.
+      </p>
+      <div class="treforged-discount">
+        Mention <span>MissJaimmie sent me</span> for a discount on your first project!
+      </div>
+      <div class="treforged-btns">
+        <a href="https://www.treforged.com" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+          Visit treforged.com
+        </a>
+        <a href="mailto:contact@treforged.com" class="btn btn-outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          contact@treforged.com
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div>
@@ -446,25 +485,72 @@
       <a href="https://poshmark.com/closet/missjaimmie" target="_blank" rel="noopener">Poshmark</a>
       <a href="https://www.ebay.com/usr/missjaimmiescloset" target="_blank" rel="noopener">eBay</a>
       <a href="mailto:missjaimmie@gmail.com">Email</a>
+      <a href="https://www.treforged.com" target="_blank" rel="noopener">TRE Forged</a>
     </div>
   </footer>
 
   <script>
-    function toggleMenu() {
-      var menu = document.getElementById('mobileMenu');
-      var btn = document.getElementById('hamburger');
-      var open = menu.classList.toggle('open');
-      btn.classList.toggle('open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
+  (function() {
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobileMenu');
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      hamburger.classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
     function closeMenu() {
-      document.getElementById('mobileMenu').classList.remove('open');
-      document.getElementById('hamburger').classList.remove('open');
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
       document.body.style.overflow = '';
     }
-    document.getElementById('mobileMenu').addEventListener('click', function(e) {
-      if (e.target === this) closeMenu();
+
+    hamburger.addEventListener('click', function() {
+      if (mobileMenu.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    // Close when clicking a menu link
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close when clicking backdrop
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target === mobileMenu) closeMenu();
     });
 
     // Nav shadow on scroll
-    var nav = document.getEle
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 40) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll reveal
+    if ('IntersectionObserver' in window) {
+      document.body.classList.add('js-loaded');
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry, i) {
+          if (entry.isIntersecting) {
+            setTimeout(function() {
+              entry.target.classList.add('visible');
+            }, i * 55);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        obs.observe(el);
+      });
+    }
+  })();
+</script>
+</body>
+</html>
