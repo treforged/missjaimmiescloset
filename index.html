@@ -196,6 +196,15 @@
     .footer-links { display:flex; gap:1.25rem; }
     footer a { color:rgba(255,255,255,0.4); text-decoration:none; transition:color 0.2s; }
     footer a:hover { color:var(--blush); }
+
+    /* REVIEWS */
+    .reviews-inner { max-width: 900px; margin: 0 auto; }
+    .reviews-cards { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (min-width: 640px) { .reviews-cards { grid-template-columns: repeat(3, 1fr); } }
+    .review-card { background: white; border-radius: 14px; padding: 1.75rem 1.5rem; box-shadow: 0 4px 18px rgba(0,0,0,0.05); border: 1px solid rgba(200,120,106,0.1); display: flex; flex-direction: column; gap: 0.8rem; }
+    .review-stars { color: var(--gold); font-size: 1rem; letter-spacing: 0.1em; }
+    .review-text { font-size: 0.9rem; line-height: 1.7; color: #555; font-style: italic; flex: 1; }
+    .review-author { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #aaa; }
   </style>
 </head>
 <body>
@@ -208,6 +217,7 @@
       <li><a href="#categories">What We Carry</a></li>
       <li><a href="#shipping">Shipping</a></li>
       <li><a href="#popups">Pop-Ups</a></li>
+      <li><a href="#reviews">Reviews</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -222,6 +232,7 @@
     <a href="#categories" onclick="closeMenu()">What We Carry</a>
     <a href="#shipping" onclick="closeMenu()">Shipping</a>
     <a href="#popups" onclick="closeMenu()">Pop-Ups</a>
+    <a href="#reviews" onclick="closeMenu()">Reviews</a>
     <a href="#about" onclick="closeMenu()">About</a>
     <a href="#contact" onclick="closeMenu()">Contact</a>
     <div class="mobile-menu-ctas">
@@ -256,7 +267,7 @@
       <div class="stat-item"><div class="stat-number">2K+</div><div class="stat-label">Active Listings</div></div>
       <div class="stat-item"><div class="stat-number">5K+</div><div class="stat-label">Sales</div></div>
       <div class="stat-item"><div class="stat-number">66K+</div><div class="stat-label">Followers</div></div>
-      <div class="stat-item"><div class="stat-number">🇺🇸</div><div class="stat-label">Ships US Only</div></div>
+      <div class="stat-item"><div class="stat-number" style="font-size:1.8rem;line-height:1.2;">&#127482;&#127480;</div><div class="stat-label">Ships US Only</div></div>
     </div>
   </section>
 
@@ -314,17 +325,17 @@
         <div class="shipping-tag">🚚 Shipping Info</div>
         <h2>Shipping <em>Across the US</em></h2>
         <p>MissJaimmie's Closet ships exclusively within the United States via Poshmark and eBay for easy, protected transactions. All orders are packed with care and shipped promptly.</p>
-        <p>For bulk orders, wholesale pricing, or reseller inquiries, email us at <strong><a href="mailto:missjaimmie@gmail.com" style="color:var(--rose);text-decoration:none;">missjaimmie@gmail.com</a></strong> for a custom quote.</p>
-        <a href="mailto:missjaimmie@gmail.com" class="btn btn-primary" style="margin-top:0.75rem;">
+        <p>For bulk orders, wholesale pricing, or reseller inquiries, email us at <strong><a href="/cdn-cgi/l/email-protection#ff92968c8c959e969292969abf98929e9693d19c9092" style="color:var(--rose);text-decoration:none;"><span class="__cf_email__" data-cfemail="9df0f4eeeef7fcf4f0f0f4f8ddfaf0fcf4f1b3fef2f0">[email&#160;protected]</span></a></strong> for a custom quote.</p>
+        <a href="/cdn-cgi/l/email-protection#fe93978d8d949f979393979bbe99939f9792d09d9193" class="btn btn-primary" style="margin-top:0.75rem;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Contact for Wholesale
         </a>
       </div>
       <div class="shipping-cards reveal">
-        <div class="s-card"><div class="s-icon">🇺🇸</div><div><div class="s-label">Ships To</div><div class="s-value">United States only</div></div></div>
+        <div class="s-card"><div class="s-icon" style="font-size:1.4rem;">&#127482;&#127480;</div><div><div class="s-label">Ships To</div><div class="s-value">United States only</div></div></div>
         <div class="s-card"><div class="s-icon">📦</div><div><div class="s-label">Platform Shipping</div><div class="s-value">Via Poshmark &amp; eBay — easy &amp; protected</div></div></div>
         <div class="s-card"><div class="s-icon">🏷️</div><div><div class="s-label">Wholesale / Bulk</div><div class="s-value">Custom pricing — contact us</div></div></div>
-        <div class="s-card"><div class="s-icon">✉️</div><div><div class="s-label">Contact</div><div class="s-value"><a href="mailto:missjaimmie@gmail.com" style="color:var(--rose);text-decoration:none;">missjaimmie@gmail.com</a></div></div></div>
+        <div class="s-card"><div class="s-icon">✉️</div><div><div class="s-label">Contact</div><div class="s-value"><a href="/cdn-cgi/l/email-protection#bdd0d4ceced7dcd4d0d0d4d8fddad0dcd4d193ded2d0" style="color:var(--rose);text-decoration:none;"><span class="__cf_email__" data-cfemail="a1ccc8d2d2cbc0c8ccccc8c4e1c6ccc0c8cd8fc2cecc">[email&#160;protected]</span></a></div></div></div>
       </div>
     </div>
   </section>
@@ -346,6 +357,41 @@
     </div>
   </section>
 
+
+  <!-- REVIEWS -->
+  <section class="section" id="reviews" style="background:var(--soft-gray)">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Customer Love</div>
+      <h2>What Buyers Are <em>Saying</em></h2>
+    </div>
+    <div class="reviews-inner reveal">
+      <div class="reviews-cards">
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">"Amazing seller! Items were exactly as described, shipped super fast. Will definitely buy again!"</p>
+          <div class="review-author">— Verified Poshmark Buyer</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">"Love MissJaimmie's Closet! Great quality finds at great prices. Highly recommend!"</p>
+          <div class="review-author">— Verified Poshmark Buyer</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">"Fast shipping, well packaged, and exactly what I ordered. One of my favorite closets!"</p>
+          <div class="review-author">— Verified Poshmark Buyer</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:2.5rem;">
+        <p style="font-size:0.9rem;color:#777;margin-bottom:1rem;">Over 5,000+ happy customers and counting.</p>
+        <a href="https://poshmark.com/closet/6330b8b167755dff6ace0e68/love-notes" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          See All Reviews on Poshmark
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section class="section" id="about" style="background:var(--soft-gray)">
     <div class="about-inner reveal">
@@ -353,7 +399,7 @@
       <h2>Meet <em>MissJaimmie</em></h2>
       <p class="about-text">MissJaimmie's Closet was born from a love of fashion, great finds, and giving items a second life. As an Army Veteran and University of Florida graduate (Go Gators! 🐊), Jaimmie brings the same dedication and discipline to curating her closet as she did in service. With 2,000+ active listings, 5,000+ sales, and a loyal community of 66,000+ Poshmark followers, MissJaimmie's Closet has become one of Gainesville's most-loved online boutiques.</p>
       <div class="about-pills">
-        <span class="pill">🇺🇸 Army Veteran</span>
+        <span class="pill"><span style="font-size:0.9em;">&#127482;&#127480;</span> Army Veteran</span>
         <span class="pill">🎓 UF Graduate</span>
         <span class="pill">⭐ Posh Ambassador II</span>
         <span class="pill">🐊 Go Gators</span>
@@ -370,10 +416,10 @@
       <h2>Let's <em style="color:var(--blush)">Connect</em></h2>
       <p class="contact-sub">Questions about an item? Interested in wholesale or bulk pricing? Ready to place a large order? We'd love to hear from you.</p>
       <div class="contact-cards">
-        <a href="mailto:missjaimmie@gmail.com" class="contact-card">
+        <a href="/cdn-cgi/l/email-protection#a7caced4d4cdc6cecacacec2e7c0cac6cecb89c4c8ca" class="contact-card">
           <div class="contact-card-icon">✉️</div>
           <div class="contact-card-label">Email Us</div>
-          <div class="contact-card-value">missjaimmie@gmail.com</div>
+          <div class="contact-card-value"><span class="__cf_email__" data-cfemail="721f1b010118131b1f1f1b1732151f131b1e5c111d1f">[email&#160;protected]</span></div>
         </a>
         <a href="https://poshmark.com/closet/missjaimmie" target="_blank" rel="noopener" class="contact-card">
           <div class="contact-card-icon">🛍️</div>
@@ -382,7 +428,7 @@
         </a>
       </div>
       <div class="wholesale-note">
-        <strong>Wholesale &amp; Bulk Orders:</strong> Email missjaimmie@gmail.com with your request and quantity. We'll get back to you with custom pricing and shipping options.
+        <strong>Wholesale &amp; Bulk Orders:</strong> Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d10140e0e171c14101014183d1a101c1411531e1210">[email&#160;protected]</a> with your request and quantity. We'll get back to you with custom pricing and shipping options.
       </div>
     </div>
   </section>
@@ -399,11 +445,11 @@
     <div class="footer-links">
       <a href="https://poshmark.com/closet/missjaimmie" target="_blank" rel="noopener">Poshmark</a>
       <a href="https://www.ebay.com/usr/missjaimmiescloset" target="_blank" rel="noopener">eBay</a>
-      <a href="mailto:missjaimmie@gmail.com">Email</a>
+      <a href="/cdn-cgi/l/email-protection#a0cdc9d3d3cac1c9cdcdc9c5e0c7cdc1c9cc8ec3cfcd">Email</a>
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     function toggleMenu() {
       var menu = document.getElementById('mobileMenu');
       var btn = document.getElementById('hamburger');
@@ -421,24 +467,4 @@
     });
 
     // Nav shadow on scroll
-    var nav = document.getElementById('nav');
-    window.addEventListener('scroll', function() {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    });
-
-    // Scroll reveal — only animate if IntersectionObserver is supported
-    if ('IntersectionObserver' in window) {
-      document.body.classList.add('js-loaded');
-      var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e, i) {
-          if (e.isIntersecting) {
-            setTimeout(function() { e.target.classList.add('visible'); }, i * 55);
-            obs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.08 });
-      document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
-    }
-  </script>
-</body>
-</html>
+    var nav = document.getEle
