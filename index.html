@@ -2,876 +2,743 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Miss Jaimmie's Closet</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MissJaimmie's Closet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --cream: #FAF6F0;
-      --blush: #E8C4B0;
-      --dusty-rose: #C9856A;
-      --deep: #2B1F1A;
-      --mocha: #7A5C4F;
+      --blush: #E8C9B8;
+      --rose: #C8786A;
+      --burgundy: #7A2E2E;
+      --charcoal: #1E1E1E;
       --gold: #C9A96E;
-      --light-gold: #F0DEB8;
+      --soft-gray: #F2EDE8;
     }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--cream);
-      color: var(--deep);
+      color: var(--charcoal);
       overflow-x: hidden;
     }
 
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; width: 100%; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.2rem 3rem;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 2.5rem;
       background: rgba(250,246,240,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201,169,110,0.2);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(200,120,106,0.15);
+      transition: box-shadow 0.3s;
     }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      font-weight: 700;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
       letter-spacing: 0.02em;
-      color: var(--deep);
+      color: var(--burgundy);
       text-decoration: none;
     }
-    .nav-logo span { color: var(--dusty-rose); font-style: italic; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-logo span { font-style: italic; color: var(--rose); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
     .nav-links a {
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--mocha);
-      transition: color 0.2s;
+      color: var(--charcoal);
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
     }
-    .nav-links a:hover { color: var(--dusty-rose); }
-    .nav-shop-btn {
-      background: var(--deep);
-      color: var(--cream) !important;
-      padding: 0.55rem 1.3rem;
-      border-radius: 2px;
-    }
-    .nav-shop-btn:hover { background: var(--dusty-rose); color: var(--cream) !important; }
+    .nav-links a:hover { opacity: 1; color: var(--rose); }
 
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      padding-top: 80px;
-      overflow: hidden;
-    }
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 5rem 4rem 5rem 5rem;
+      align-items: center;
+      padding: 8rem 5vw 4rem;
       position: relative;
+      overflow: hidden;
+      gap: 3rem;
     }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 55%;
+      height: 110%;
+      background: radial-gradient(ellipse at 70% 40%, #e8c9b830 0%, #c8786a18 50%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-text { position: relative; z-index: 2; }
+
     .hero-eyebrow {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.25em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--dusty-rose);
+      color: var(--rose);
+      margin-bottom: 1.2rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--rose);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--charcoal);
       margin-bottom: 1.5rem;
     }
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 5vw, 5.5rem);
-      font-weight: 900;
-      line-height: 1.0;
-      margin-bottom: 1.8rem;
-      color: var(--deep);
-    }
-    .hero-title em {
+    h1 em {
       font-style: italic;
-      color: var(--dusty-rose);
+      color: var(--rose);
     }
+
     .hero-sub {
       font-size: 1rem;
-      line-height: 1.7;
-      color: var(--mocha);
+      line-height: 1.75;
+      color: #555;
       max-width: 420px;
-      margin-bottom: 2.8rem;
-    }
-    .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-primary {
-      display: inline-block;
-      background: var(--deep);
-      color: var(--cream);
-      padding: 1rem 2.2rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      transition: background 0.25s, transform 0.2s;
-    }
-    .btn-primary:hover { background: var(--dusty-rose); transform: translateY(-2px); }
-    .btn-secondary {
-      display: inline-block;
-      border: 1.5px solid var(--mocha);
-      color: var(--mocha);
-      padding: 1rem 2.2rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      transition: all 0.25s;
-    }
-    .btn-secondary:hover { border-color: var(--dusty-rose); color: var(--dusty-rose); transform: translateY(-2px); }
-
-    .hero-stats {
-      display: flex; gap: 2.5rem; margin-top: 3.5rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid rgba(201,169,110,0.3);
-    }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--deep);
-    }
-    .stat-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--mocha);
-      margin-top: 0.2rem;
+      margin-bottom: 2.5rem;
     }
 
-    .hero-right {
-      position: relative;
-      background: var(--light-gold);
-      overflow: hidden;
+    .hero-badges {
       display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .badge {
+      display: inline-flex;
       align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 99px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+    .badge-gold { background: rgba(201,169,110,0.15); color: var(--gold); border: 1px solid rgba(201,169,110,0.35); }
+    .badge-rose { background: rgba(200,120,106,0.12); color: var(--rose); border: 1px solid rgba(200,120,106,0.3); }
+    .badge-burg { background: rgba(122,46,46,0.1); color: var(--burgundy); border: 1px solid rgba(122,46,46,0.25); }
+
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--rose);
+      color: white;
+      box-shadow: 0 4px 18px rgba(200,120,106,0.35);
+    }
+    .btn-primary:hover {
+      background: var(--burgundy);
+      box-shadow: 0 6px 24px rgba(122,46,46,0.35);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--charcoal);
+      border: 1.5px solid rgba(30,30,30,0.25);
+    }
+    .btn-outline:hover {
+      border-color: var(--rose);
+      color: var(--rose);
+      transform: translateY(-2px);
+    }
+    .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* Hero right side */
+    .hero-visual {
+      position: relative;
+      display: flex;
       justify-content: center;
+      align-items: center;
     }
-    .hero-right::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: 
-        radial-gradient(ellipse at 30% 20%, rgba(232,196,176,0.6) 0%, transparent 60%),
-        radial-gradient(ellipse at 70% 80%, rgba(201,133,106,0.3) 0%, transparent 60%);
-    }
-    .hero-pattern {
-      position: absolute;
-      inset: 0;
-      background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 30px,
-        rgba(201,169,110,0.08) 30px,
-        rgba(201,169,110,0.08) 31px
-      );
-    }
-    .hero-center-text {
+
+    .stats-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 2.5rem;
+      max-width: 360px;
+      width: 100%;
       position: relative;
       z-index: 2;
-      text-align: center;
-      padding: 2rem;
+      animation: floatCard 5s ease-in-out infinite;
     }
-    .hero-center-text .big-initial {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(8rem, 18vw, 18rem);
-      font-weight: 900;
-      font-style: italic;
-      color: rgba(43,31,26,0.07);
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--burgundy);
       line-height: 1;
-      display: block;
-      user-select: none;
     }
-    .hero-badge {
-      position: absolute;
-      bottom: 3rem;
-      right: 3rem;
-      background: var(--deep);
-      color: var(--cream);
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      z-index: 3;
-    }
-    .hero-badge span:first-child {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.75rem;
-      font-style: italic;
-    }
-    .hero-badge span:last-child {
-      font-size: 0.65rem;
+    .stat-label {
+      font-size: 0.7rem;
+      font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      opacity: 0.7;
-      margin-top: 0.25rem;
-    }
-    .posh-badge {
-      position: absolute;
-      top: 3rem;
-      left: 3rem;
-      background: var(--dusty-rose);
-      color: white;
-      padding: 0.5rem 1rem;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      font-weight: 500;
-      border-radius: 2px;
-      z-index: 3;
-    }
-
-    /* ── MARQUEE ── */
-    .marquee-bar {
-      background: var(--deep);
-      color: var(--gold);
-      padding: 0.9rem 0;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-    .marquee-track {
-      display: inline-flex;
-      animation: marquee 28s linear infinite;
-    }
-    .marquee-item {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 0 2.5rem;
-    }
-    .marquee-dot {
-      color: var(--dusty-rose);
-      font-size: 1.2rem;
-      vertical-align: middle;
-    }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    /* ── SECTIONS ── */
-    section { padding: 6rem 5rem; }
-    .section-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 3.5rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .section-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--dusty-rose);
-      margin-bottom: 0.6rem;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 700;
-      color: var(--deep);
-    }
-    .section-title em { font-style: italic; color: var(--dusty-rose); }
-    .view-all {
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--mocha);
-      text-decoration: none;
-      border-bottom: 1px solid currentColor;
-      padding-bottom: 2px;
-      transition: color 0.2s;
-    }
-    .view-all:hover { color: var(--dusty-rose); }
-
-    /* ── CATEGORIES ── */
-    #categories { background: var(--cream); }
-    .cat-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1.2rem;
-    }
-    .cat-card {
-      background: white;
-      border: 1px solid rgba(201,169,110,0.2);
-      border-radius: 4px;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      text-decoration: none;
-      color: var(--deep);
-      transition: all 0.25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .cat-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      height: 3px; width: 0;
-      background: var(--dusty-rose);
-      transition: width 0.3s;
-    }
-    .cat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(43,31,26,0.08); }
-    .cat-card:hover::after { width: 100%; }
-    .cat-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
-    .cat-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-    }
-    .cat-desc {
-      font-size: 0.75rem;
-      color: var(--mocha);
+      color: #888;
       margin-top: 0.3rem;
     }
 
-    /* ── FEATURED ── */
-    #featured { background: #F4EDE4; }
-    .featured-grid {
+    .hero-blob {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%;
+      background: linear-gradient(135deg, var(--blush) 0%, rgba(232,201,184,0.3) 100%);
+      animation: morphBlob 8s ease-in-out infinite;
+      z-index: 1;
+    }
+    @keyframes morphBlob {
+      0%, 100% { border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%; }
+      33% { border-radius: 45% 55% 40% 60% / 55% 40% 60% 45%; }
+      66% { border-radius: 55% 45% 60% 40% / 40% 60% 45% 55%; }
+    }
+
+    /* ── CATEGORIES ── */
+    .section { padding: 6rem 5vw; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 0.8rem;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.15;
+    }
+    h2 em { font-style: italic; color: var(--rose); }
+
+    .categories-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: auto auto;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       gap: 1.2rem;
+      max-width: 900px;
+      margin: 0 auto;
     }
-    .feat-card {
+
+    .cat-card {
       background: white;
-      border-radius: 4px;
-      overflow: hidden;
-      position: relative;
-      transition: transform 0.25s, box-shadow 0.25s;
+      border-radius: 12px;
+      padding: 1.8rem 1rem;
+      text-align: center;
+      transition: all 0.3s;
+      border: 1px solid rgba(0,0,0,0.05);
+      cursor: default;
     }
-    .feat-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(43,31,26,0.1); }
-    .feat-card.large { grid-row: 1 / 3; }
-    .feat-img {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      background: var(--light-gold);
+    .cat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(200,120,106,0.12);
+      border-color: rgba(200,120,106,0.2);
+    }
+    .cat-icon { font-size: 2.2rem; margin-bottom: 0.8rem; display: block; }
+    .cat-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+    }
+
+    /* ── SHOP PLATFORMS ── */
+    .platforms { background: var(--charcoal); padding: 6rem 5vw; }
+
+    .platforms .section-eyebrow { color: var(--blush); }
+    .platforms h2 { color: white; }
+
+    .platform-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 800px;
+      margin: 3rem auto 0;
+    }
+
+    .platform-card {
+      border-radius: 16px;
+      padding: 2.8rem 2.5rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .platform-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.35);
+    }
+
+    .platform-card.poshmark {
+      background: linear-gradient(135deg, #7B2D8B 0%, #C74B9A 100%);
+    }
+    .platform-card.ebay {
+      background: linear-gradient(135deg, #0064D2 0%, #0FA34D 100%);
+    }
+
+    .platform-card::after {
+      content: '→';
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.5);
+      transition: all 0.3s;
+    }
+    .platform-card:hover::after {
+      color: white;
+      right: 1.5rem;
+    }
+
+    .platform-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: white;
+    }
+    .platform-handle {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.65);
+      font-weight: 500;
+    }
+    .platform-desc {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.65;
+    }
+    .platform-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: white;
+      background: rgba(255,255,255,0.18);
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      align-self: flex-start;
+      transition: background 0.2s;
+    }
+    .platform-card:hover .platform-cta { background: rgba(255,255,255,0.28); }
+
+    /* ── POPUP SECTION ── */
+    .popup-section { background: var(--soft-gray); }
+
+    .popup-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .popup-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(200,120,106,0.12);
+      color: var(--rose);
+      border: 1px solid rgba(200,120,106,0.3);
+      border-radius: 99px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .popup-inner h2 { text-align: left; margin-bottom: 1.2rem; }
+    .popup-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .popup-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .popup-info-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+    .popup-info-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(200,120,106,0.1);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
-      color: var(--mocha);
+      font-size: 1.2rem;
+      flex-shrink: 0;
     }
-    .feat-card.large .feat-img { aspect-ratio: 3/4; font-size: 5rem; }
-    .feat-info { padding: 1.2rem 1.5rem 1.5rem; }
-    .feat-brand {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
+    .popup-info-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--dusty-rose);
-      margin-bottom: 0.3rem;
+      color: #999;
     }
-    .feat-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--deep);
-      margin-bottom: 0.6rem;
-    }
-    .feat-card.large .feat-name { font-size: 1.25rem; }
-    .feat-price-row { display: flex; align-items: center; gap: 0.75rem; }
-    .feat-price {
+    .popup-info-value {
+      font-size: 0.9rem;
       font-weight: 500;
-      font-size: 1rem;
-      color: var(--deep);
-    }
-    .feat-original {
-      font-size: 0.8rem;
-      color: var(--mocha);
-      text-decoration: line-through;
-    }
-    .feat-badge-nwt {
-      position: absolute;
-      top: 1rem; left: 1rem;
-      background: var(--deep);
-      color: var(--cream);
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.6rem;
-    }
-    .shop-link {
-      display: inline-block;
-      margin-top: 1rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--dusty-rose);
-      text-decoration: none;
-      border-bottom: 1px solid currentColor;
+      color: var(--charcoal);
+      margin-top: 0.1rem;
     }
 
     /* ── ABOUT ── */
-    #about {
-      background: var(--deep);
-      color: var(--cream);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-    #about .section-tag { color: var(--gold); }
-    #about .section-title { color: var(--cream); }
-    .about-text {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: rgba(250,246,240,0.75);
-      margin-bottom: 1.5rem;
-    }
-    .about-text strong { color: var(--gold); font-weight: 500; }
-    .about-right {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: rgba(201,169,110,0.2);
-      border: 1px solid rgba(201,169,110,0.2);
-    }
-    .about-stat {
-      background: rgba(43,31,26,0.5);
-      padding: 2rem;
+    .about-inner {
+      max-width: 720px;
+      margin: 0 auto;
       text-align: center;
     }
-    .about-stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--gold);
+    .about-inner h2 { margin-bottom: 1.5rem; }
+    .about-text {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: #555;
+      margin-bottom: 2rem;
     }
-    .about-stat-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(250,246,240,0.6);
-      margin-top: 0.4rem;
-    }
-
-    /* ── SHOP LINKS ── */
-    #shop-links { background: var(--cream); }
-    .links-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    .link-card {
+    .about-pills {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 2.5rem 3rem;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: transform 0.25s, box-shadow 0.25s;
-      position: relative;
-      overflow: hidden;
+      gap: 0.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-    .link-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(43,31,26,0.12); }
-    .link-card.poshmark { background: #7B2D5B; color: white; }
-    .link-card.ebay { background: #E53238; color: white; }
-    .link-card-left h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-    }
-    .link-card-left p {
-      font-size: 0.8rem;
-      opacity: 0.75;
-      letter-spacing: 0.05em;
-    }
-    .link-arrow {
-      font-size: 2rem;
-      opacity: 0.5;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-    .link-card:hover .link-arrow { opacity: 1; transform: translateX(6px); }
-    .link-listings {
-      position: absolute;
-      top: 1.2rem; right: 1.5rem;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0.5;
+    .pill {
+      padding: 0.45rem 1.1rem;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: white;
+      border: 1.5px solid rgba(200,120,106,0.3);
+      color: var(--rose);
     }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--deep);
-      color: rgba(250,246,240,0.6);
-      padding: 3rem 5rem;
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.55);
+      padding: 2.5rem 5vw;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 1.5rem;
-      border-top: 1px solid rgba(201,169,110,0.15);
-    }
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--cream);
-    }
-    .footer-logo span { color: var(--gold); font-style: italic; }
-    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
-    .footer-links a {
-      color: rgba(250,246,240,0.5);
-      text-decoration: none;
+      gap: 1rem;
       font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+    }
+    footer .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: white;
+      font-style: italic;
+    }
+    footer a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
       transition: color 0.2s;
     }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-copy { font-size: 0.75rem; }
+    footer a:hover { color: var(--blush); }
+    .footer-links { display: flex; gap: 1.5rem; }
 
-    /* ── ANIMATIONS ── */
-    .fade-up {
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
     }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: none; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { padding: 3rem 2rem; }
-      .hero-right { min-height: 40vh; }
-      section { padding: 4rem 2rem; }
-      .featured-grid { grid-template-columns: 1fr 1fr; }
-      .feat-card.large { grid-column: 1 / 3; grid-row: auto; }
-      #about { grid-template-columns: 1fr; gap: 3rem; }
-      .links-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; text-align: center; padding: 2rem; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+      .hero-visual { display: none; }
+      .platform-cards { grid-template-columns: 1fr; }
+      .popup-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .categories-grid { grid-template-columns: repeat(3, 1fr); }
+      footer { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-logo">Miss <span>Jaimmie's</span> Closet</a>
+  <nav id="nav">
+    <a href="#" class="nav-logo">Miss<span>Jaimmie's</span> Closet</a>
     <ul class="nav-links">
-      <li><a href="#categories">Shop</a></li>
-      <li><a href="#featured">Featured</a></li>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#categories">What We Carry</a></li>
+      <li><a href="#popups">Pop-Ups</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="nav-shop-btn">Shop Now</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-left">
-      <p class="hero-eyebrow">✦ Gainesville, FL · Army Veteran · UF Graduate</p>
-      <h1 class="hero-title">
-        Style Finds<br>
-        You <em>Actually</em><br>
-        Want.
-      </h1>
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Curator · Reseller · Veteran-Owned</div>
+      <h1>Your Favorite<br><em>Closet</em> is<br>Now Online</h1>
       <p class="hero-sub">
-        Jerseys, sneakers, designer bags, Stanleys, and more — all curated by Jaimmie. 
-        Posh Ambassador II with over 6,000 listings and thousands of happy buyers.
+        Curated fashion finds, rare jerseys, designer bags, Stanley cups, fresh kicks, and more — all handpicked by MissJaimmie herself. Based in Gainesville, FL. Shipping nationwide.
       </p>
-      <div class="hero-cta-group">
-        <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="btn-primary">Shop Poshmark</a>
-        <a href="https://www.ebay.com/usr/shotty99" target="_blank" class="btn-secondary">Shop eBay</a>
+      <div class="hero-badges">
+        <span class="badge badge-gold">✦ Posh Ambassador II</span>
+        <span class="badge badge-rose">🏈 UF Gator Fan</span>
+        <span class="badge badge-burg">⭐ Army Veteran</span>
       </div>
-      <div class="hero-stats">
-        <div>
-          <div class="stat-num">6,356</div>
+      <div class="cta-group">
+        <a href="https://poshmark.com/closet/missjaimmie" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Shop Poshmark
+        </a>
+        <a href="https://www.ebay.com/usr/missjaimmiescloset" target="_blank" rel="noopener" class="btn btn-outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.98-1.61L23 6H6"/></svg>
+          Shop eBay
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-blob"></div>
+      <div class="stats-card">
+        <div class="stat-item">
+          <div class="stat-number">6K+</div>
           <div class="stat-label">Listings</div>
         </div>
-        <div>
-          <div class="stat-num">66K+</div>
+        <div class="stat-item">
+          <div class="stat-number">66K+</div>
           <div class="stat-label">Followers</div>
         </div>
-        <div>
-          <div class="stat-num">15%</div>
+        <div class="stat-item">
+          <div class="stat-number">150K+</div>
+          <div class="stat-label">Shares</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">15%</div>
           <div class="stat-label">Bundle Discount</div>
         </div>
       </div>
     </div>
-    <div class="hero-right">
-      <div class="hero-pattern"></div>
-      <div class="hero-center-text">
-        <span class="big-initial">MJ</span>
-      </div>
-      <div class="posh-badge">✦ Posh Ambassador II</div>
-      <div class="hero-badge">
-        <span>New With Tags</span>
-        <span>Always Fresh</span>
-      </div>
-    </div>
   </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee-bar">
-    <div class="marquee-track">
-      <span class="marquee-item">Jerseys <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Sneakers <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Designer Bags <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Stanley Tumblers <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Mitchell & Ness <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Nike <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Loungefly <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Bonnets & Hair Care <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Women's Fashion <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Men's Apparel <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Kids <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Jerseys <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Sneakers <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Designer Bags <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Stanley Tumblers <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Mitchell & Ness <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Nike <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Loungefly <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Bonnets & Hair Care <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Women's Fashion <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Men's Apparel <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Kids <span class="marquee-dot">·</span></span>
-    </div>
-  </div>
 
   <!-- CATEGORIES -->
-  <section id="categories">
-    <div class="section-header fade-up">
-      <div>
-        <p class="section-tag">Browse by Category</p>
-        <h2 class="section-title">Shop the <em>Closet</em></h2>
-      </div>
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="view-all">View All Listings →</a>
+  <section class="section" id="categories">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">What We Carry</div>
+      <h2>Something for <em>Everyone</em></h2>
     </div>
-    <div class="cat-grid fade-up">
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
-        <span class="cat-icon">👟</span>
-        <div class="cat-name">Sneakers</div>
-        <div class="cat-desc">Nike, Vans, Adidas & more</div>
+    <div class="categories-grid">
+      <div class="cat-card reveal"><span class="cat-icon">🏈</span><div class="cat-name">Jerseys</div></div>
+      <div class="cat-card reveal"><span class="cat-icon">👟</span><div class="cat-name">Shoes</div></div>
+      <div class="cat-card reveal"><span class="cat-icon">👜</span><div class="cat-name">Bags</div></div>
+      <div class="cat-card reveal"><span class="cat-icon">🥤</span><div class="cat-name">Stanleys</div></div>
+      <div class="cat-card reveal"><span class="cat-icon">👗</span><div class="cat-name">Women's</div></div>
+      <div class="cat-card reveal"><span class="cat-icon">👔</span><div class="cat-name">Men's</div></div>
+      <div class="cat-card reveal"><span class="cat-icon">👶</span><div class="cat-name">Kids</div></div>
+      <div class="cat-card reveal"><span class="cat-icon">🏠</span><div class="cat-name">Home</div></div>
+      <div class="cat-card reveal"><span class="cat-icon">💎</span><div class="cat-name">Accessories</div></div>
+      <div class="cat-card reveal"><span class="cat-icon">✨</span><div class="cat-name">Designer</div></div>
+      <div class="cat-card reveal"><span class="cat-icon">📱</span><div class="cat-name">Electronics</div></div>
+      <div class="cat-card reveal"><span class="cat-icon">🎁</span><div class="cat-name">& More</div></div>
+    </div>
+  </section>
+
+  <!-- SHOP PLATFORMS -->
+  <section class="platforms" id="shop">
+    <div class="section-header reveal">
+      <div class="section-eyebrow" style="color:var(--blush)">Shop Now</div>
+      <h2 style="color:white">Find Us on Your <em style="color:var(--blush)">Favorite</em> Platform</h2>
+    </div>
+    <div class="platform-cards">
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" rel="noopener" class="platform-card poshmark reveal">
+        <div class="platform-name">Poshmark</div>
+        <div class="platform-handle">@missjaimmie</div>
+        <div class="platform-desc">Browse 6,000+ listings across women's, men's, kids, home & more. Bundle and save 15%!</div>
+        <div class="platform-cta">Shop the Closet →</div>
       </a>
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
-        <span class="cat-icon">🏀</span>
-        <div class="cat-name">Jerseys</div>
-        <div class="cat-desc">Mitchell & Ness, Nike authentic</div>
-      </a>
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
-        <span class="cat-icon">👜</span>
-        <div class="cat-name">Bags</div>
-        <div class="cat-desc">Loungefly, Coach, Michael Kors</div>
-      </a>
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
-        <span class="cat-icon">🥤</span>
-        <div class="cat-name">Stanleys</div>
-        <div class="cat-desc">40oz Quencher tumblers NWT</div>
-      </a>
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
-        <span class="cat-icon">👗</span>
-        <div class="cat-name">Women's</div>
-        <div class="cat-desc">Dresses, tops, activewear</div>
-      </a>
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
-        <span class="cat-icon">👕</span>
-        <div class="cat-name">Men's</div>
-        <div class="cat-desc">Hoodies, graphic tees, belts</div>
-      </a>
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
-        <span class="cat-icon">🎀</span>
-        <div class="cat-name">Bonnets</div>
-        <div class="cat-desc">Character & satin sleep caps</div>
-      </a>
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
-        <span class="cat-icon">✨</span>
-        <div class="cat-name">Accessories</div>
-        <div class="cat-desc">Scarves, belts, socks & more</div>
+      <a href="https://www.ebay.com/usr/missjaimmiescloset" target="_blank" rel="noopener" class="platform-card ebay reveal">
+        <div class="platform-name">eBay</div>
+        <div class="platform-handle">missjaimmiescloset</div>
+        <div class="platform-desc">From jerseys and shoes to rare finds and collectibles — all with buyer protection.</div>
+        <div class="platform-cta">Visit the Store →</div>
       </a>
     </div>
   </section>
 
-  <!-- FEATURED -->
-  <section id="featured">
-    <div class="section-header fade-up">
-      <div>
-        <p class="section-tag">Hand-Picked Finds</p>
-        <h2 class="section-title">Featured <em>Listings</em></h2>
+  <!-- POP-UP STANDS -->
+  <section class="section popup-section" id="popups">
+    <div class="popup-inner">
+      <div class="reveal">
+        <div class="popup-tag">📍 Live Events</div>
+        <h2>Catch Us at a <em>Pop-Up</em></h2>
+        <p class="popup-text">
+          MissJaimmie's Closet occasionally sets up live pop-up stands where you can shop in person, see items up close, and snag deals on the spot. Keep an eye on our social pages for upcoming event dates and locations around the Gainesville, FL area and beyond.
+        </p>
+        <a href="https://poshmark.com/closet/missjaimmie" target="_blank" rel="noopener" class="btn btn-primary">Follow for Updates</a>
       </div>
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="view-all">See All →</a>
-    </div>
-    <div class="featured-grid fade-up">
-      <div class="feat-card large">
-        <div class="feat-img" style="background: linear-gradient(135deg, #E8C4B0, #C9856A); font-size: 6rem;">🏀</div>
-        <div class="feat-badge-nwt">NWT</div>
-        <div class="feat-info">
-          <div class="feat-brand">Mitchell & Ness</div>
-          <div class="feat-name">Scottie Pippen 97–98 Bulls #33 Authentic Jersey</div>
-          <div class="feat-price-row">
-            <span class="feat-price">$145</span>
-            <span class="feat-original">$300</span>
+      <div class="popup-visual reveal">
+        <div class="popup-info-card">
+          <div class="popup-info-icon">📍</div>
+          <div>
+            <div class="popup-info-label">Home Base</div>
+            <div class="popup-info-value">Gainesville, FL</div>
           </div>
-          <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="shop-link">Shop Now →</a>
         </div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-img" style="background: linear-gradient(135deg, #B8D4E8, #6A9BC9);">🥤</div>
-        <div class="feat-badge-nwt">NWT</div>
-        <div class="feat-info">
-          <div class="feat-brand">Stanley</div>
-          <div class="feat-name">40oz Black & Gold Quencher</div>
-          <div class="feat-price-row">
-            <span class="feat-price">$95</span>
+        <div class="popup-info-card">
+          <div class="popup-info-icon">🚚</div>
+          <div>
+            <div class="popup-info-label">Shipping</div>
+            <div class="popup-info-value">Nationwide via Poshmark & eBay</div>
           </div>
-          <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="shop-link">Shop →</a>
         </div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-img" style="background: linear-gradient(135deg, #E8D4B0, #C9A96E);">👜</div>
-        <div class="feat-badge-nwt">NWT</div>
-        <div class="feat-info">
-          <div class="feat-brand">Loungefly</div>
-          <div class="feat-name">Disney Dogs Wristlet</div>
-          <div class="feat-price-row">
-            <span class="feat-price">$35</span>
+        <div class="popup-info-card">
+          <div class="popup-info-icon">🎪</div>
+          <div>
+            <div class="popup-info-label">Pop-Up Events</div>
+            <div class="popup-info-value">Occasional — follow for dates</div>
           </div>
-          <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="shop-link">Shop →</a>
         </div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-img" style="background: linear-gradient(135deg, #C9856A, #7A5C4F);">🏀</div>
-        <div class="feat-badge-nwt">NWT</div>
-        <div class="feat-info">
-          <div class="feat-brand">Nike</div>
-          <div class="feat-name">Kobe Swingman Mamba Mentality Jersey</div>
-          <div class="feat-price-row">
-            <span class="feat-price">$195</span>
-            <span class="feat-original">$349</span>
+        <div class="popup-info-card">
+          <div class="popup-info-icon">💌</div>
+          <div>
+            <div class="popup-info-label">Bundles</div>
+            <div class="popup-info-value">15% off 2+ Poshmark items</div>
           </div>
-          <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="shop-link">Shop →</a>
-        </div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-img" style="background: linear-gradient(135deg, #D4B0E8, #9A6AC9);">🎀</div>
-        <div class="feat-badge-nwt">NWT</div>
-        <div class="feat-info">
-          <div class="feat-brand">Stanley x Hello Kitty</div>
-          <div class="feat-name">40oz Red Quencher Tumbler</div>
-          <div class="feat-price-row">
-            <span class="feat-price">$95</span>
-          </div>
-          <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="shop-link">Shop →</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about">
-    <div class="fade-up">
-      <p class="section-tag">The Story</p>
-      <h2 class="section-title" style="margin-bottom:2rem;">Meet <em>Jaimmie</em></h2>
+  <section class="section" id="about">
+    <div class="about-inner reveal">
+      <div class="section-eyebrow">The Story</div>
+      <h2>Meet <em>MissJaimmie</em></h2>
       <p class="about-text">
-        <strong>Army Veteran. UF Graduate. Go Gators.</strong> Jaimmie has built one of Gainesville's most trusted resale closets from the ground up — earning the <strong>Posh Ambassador II</strong> status with thousands of five-star transactions.
+        MissJaimmie's Closet was born from a love of fashion, great finds, and giving items a second life. As an Army Veteran and University of Florida graduate (Go Gators! 🐊), Jaimmie brings the same dedication and discipline to curating her closet as she did in service. With over 6,000 active listings and a loyal community of 66,000+ Poshmark followers, MissJaimmie's Closet is one of Gainesville's most-loved online boutiques.
       </p>
-      <p class="about-text">
-        Every listing is carefully sourced and accurately described. Whether you're hunting for a <strong>Mitchell & Ness authentic jersey</strong>, a rare Stanley tumbler, or the perfect Loungefly bag, the closet is stocked fresh with items that are almost always <strong>New With Tags</strong>.
-      </p>
-      <p class="about-text">
-        Bundle <strong>2 or more items</strong> for 15% off — because good deals should come in multiples.
-      </p>
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="btn-primary" style="margin-top:1rem;">Follow the Closet</a>
-    </div>
-    <div class="about-right fade-up">
-      <div class="about-stat">
-        <div class="about-stat-num">6,356</div>
-        <div class="about-stat-label">Active Listings</div>
+      <div class="about-pills">
+        <span class="pill">🇺🇸 Army Veteran</span>
+        <span class="pill">🎓 UF Graduate</span>
+        <span class="pill">⭐ Posh Ambassador II</span>
+        <span class="pill">🐊 Go Gators</span>
+        <span class="pill">📦 Fast Shipper</span>
       </div>
-      <div class="about-stat">
-        <div class="about-stat-num">66K+</div>
-        <div class="about-stat-label">Followers</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-num">150K+</div>
-        <div class="about-stat-label">Shares</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-num">15%</div>
-        <div class="about-stat-label">Bundle Savings</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SHOP LINKS -->
-  <section id="shop-links">
-    <div class="section-header fade-up">
-      <div>
-        <p class="section-tag">Find Us Online</p>
-        <h2 class="section-title">Shop <em>Everywhere</em></h2>
-      </div>
-    </div>
-    <div class="links-grid fade-up">
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="link-card poshmark">
-        <div class="link-card-left">
-          <h3>Poshmark</h3>
-          <p>@missjaimmie · Posh Ambassador II · 6,356 listings</p>
-        </div>
-        <div class="link-arrow">→</div>
-        <div class="link-listings">15% bundle discount</div>
-      </a>
-      <a href="https://www.ebay.com/usr/shotty99" target="_blank" class="link-card ebay">
-        <div class="link-card-left">
-          <h3>eBay</h3>
-          <p>@shotty99 · Additional listings & deals</p>
-        </div>
-        <div class="link-arrow">→</div>
-        <div class="link-listings">More items available</div>
-      </a>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Miss <span>Jaimmie's</span> Closet</div>
+    <div class="footer-logo">MissJaimmie's Closet</div>
+    <div>Gainesville, FL · Veteran-Owned Small Business</div>
     <div class="footer-links">
-      <a href="https://poshmark.com/closet/missjaimmie" target="_blank">Poshmark</a>
-      <a href="https://www.ebay.com/usr/shotty99" target="_blank">eBay</a>
-      <a href="#categories">Categories</a>
-      <a href="#about">About</a>
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" rel="noopener">Poshmark</a>
+      <a href="https://www.ebay.com/usr/missjaimmiescloset" target="_blank" rel="noopener">eBay</a>
     </div>
-    <div class="footer-copy">© 2026 Miss Jaimmie's Closet · Gainesville, FL</div>
   </footer>
 
   <script>
-    // Scroll fade-in
-    const observer = new IntersectionObserver((entries) => {
+    // Scroll-triggered reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
         if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          setTimeout(() => e.target.classList.add('visible'), i * 60);
+          obs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    }, { threshold: 0.12 });
+    reveals.forEach(el => obs.observe(el));
+
+    // Nav shadow on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
   </script>
 </body>
 </html>
