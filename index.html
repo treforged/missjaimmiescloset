@@ -1,2 +1,877 @@
-<h1>Miss Jaimmie's Closet</h1>
-<p>Coming soon.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miss Jaimmie's Closet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF6F0;
+      --blush: #E8C4B0;
+      --dusty-rose: #C9856A;
+      --deep: #2B1F1A;
+      --mocha: #7A5C4F;
+      --gold: #C9A96E;
+      --light-gold: #F0DEB8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--deep);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(250,246,240,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,169,110,0.2);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--deep);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--dusty-rose); font-style: italic; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mocha);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--dusty-rose); }
+    .nav-shop-btn {
+      background: var(--deep);
+      color: var(--cream) !important;
+      padding: 0.55rem 1.3rem;
+      border-radius: 2px;
+    }
+    .nav-shop-btn:hover { background: var(--dusty-rose); color: var(--cream) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem 5rem 5rem;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--dusty-rose);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      margin-bottom: 1.8rem;
+      color: var(--deep);
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--dusty-rose);
+    }
+    .hero-sub {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--mocha);
+      max-width: 420px;
+      margin-bottom: 2.8rem;
+    }
+    .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--deep);
+      color: var(--cream);
+      padding: 1rem 2.2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--dusty-rose); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-block;
+      border: 1.5px solid var(--mocha);
+      color: var(--mocha);
+      padding: 1rem 2.2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+    .btn-secondary:hover { border-color: var(--dusty-rose); color: var(--dusty-rose); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(201,169,110,0.3);
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--deep);
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mocha);
+      margin-top: 0.2rem;
+    }
+
+    .hero-right {
+      position: relative;
+      background: var(--light-gold);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 30% 20%, rgba(232,196,176,0.6) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 80%, rgba(201,133,106,0.3) 0%, transparent 60%);
+    }
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 30px,
+        rgba(201,169,110,0.08) 30px,
+        rgba(201,169,110,0.08) 31px
+      );
+    }
+    .hero-center-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+    }
+    .hero-center-text .big-initial {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(8rem, 18vw, 18rem);
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(43,31,26,0.07);
+      line-height: 1;
+      display: block;
+      user-select: none;
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: 3rem;
+      right: 3rem;
+      background: var(--deep);
+      color: var(--cream);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 3;
+    }
+    .hero-badge span:first-child {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.75rem;
+      font-style: italic;
+    }
+    .hero-badge span:last-child {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-top: 0.25rem;
+    }
+    .posh-badge {
+      position: absolute;
+      top: 3rem;
+      left: 3rem;
+      background: var(--dusty-rose);
+      color: white;
+      padding: 0.5rem 1rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      border-radius: 2px;
+      z-index: 3;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-bar {
+      background: var(--deep);
+      color: var(--gold);
+      padding: 0.9rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-item {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0 2.5rem;
+    }
+    .marquee-dot {
+      color: var(--dusty-rose);
+      font-size: 1.2rem;
+      vertical-align: middle;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 5rem; }
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .section-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--dusty-rose);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      color: var(--deep);
+    }
+    .section-title em { font-style: italic; color: var(--dusty-rose); }
+    .view-all {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mocha);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+    .view-all:hover { color: var(--dusty-rose); }
+
+    /* ── CATEGORIES ── */
+    #categories { background: var(--cream); }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.2rem;
+    }
+    .cat-card {
+      background: white;
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 4px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--deep);
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 3px; width: 0;
+      background: var(--dusty-rose);
+      transition: width 0.3s;
+    }
+    .cat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(43,31,26,0.08); }
+    .cat-card:hover::after { width: 100%; }
+    .cat-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+    .cat-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .cat-desc {
+      font-size: 0.75rem;
+      color: var(--mocha);
+      margin-top: 0.3rem;
+    }
+
+    /* ── FEATURED ── */
+    #featured { background: #F4EDE4; }
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1.2rem;
+    }
+    .feat-card {
+      background: white;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .feat-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(43,31,26,0.1); }
+    .feat-card.large { grid-row: 1 / 3; }
+    .feat-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      background: var(--light-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--mocha);
+    }
+    .feat-card.large .feat-img { aspect-ratio: 3/4; font-size: 5rem; }
+    .feat-info { padding: 1.2rem 1.5rem 1.5rem; }
+    .feat-brand {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dusty-rose);
+      margin-bottom: 0.3rem;
+    }
+    .feat-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--deep);
+      margin-bottom: 0.6rem;
+    }
+    .feat-card.large .feat-name { font-size: 1.25rem; }
+    .feat-price-row { display: flex; align-items: center; gap: 0.75rem; }
+    .feat-price {
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--deep);
+    }
+    .feat-original {
+      font-size: 0.8rem;
+      color: var(--mocha);
+      text-decoration: line-through;
+    }
+    .feat-badge-nwt {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      background: var(--deep);
+      color: var(--cream);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.6rem;
+    }
+    .shop-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dusty-rose);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--deep);
+      color: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    #about .section-tag { color: var(--gold); }
+    #about .section-title { color: var(--cream); }
+    .about-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(250,246,240,0.75);
+      margin-bottom: 1.5rem;
+    }
+    .about-text strong { color: var(--gold); font-weight: 500; }
+    .about-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(201,169,110,0.2);
+      border: 1px solid rgba(201,169,110,0.2);
+    }
+    .about-stat {
+      background: rgba(43,31,26,0.5);
+      padding: 2rem;
+      text-align: center;
+    }
+    .about-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .about-stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(250,246,240,0.6);
+      margin-top: 0.4rem;
+    }
+
+    /* ── SHOP LINKS ── */
+    #shop-links { background: var(--cream); }
+    .links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2.5rem 3rem;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .link-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(43,31,26,0.12); }
+    .link-card.poshmark { background: #7B2D5B; color: white; }
+    .link-card.ebay { background: #E53238; color: white; }
+    .link-card-left h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .link-card-left p {
+      font-size: 0.8rem;
+      opacity: 0.75;
+      letter-spacing: 0.05em;
+    }
+    .link-arrow {
+      font-size: 2rem;
+      opacity: 0.5;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .link-card:hover .link-arrow { opacity: 1; transform: translateX(6px); }
+    .link-listings {
+      position: absolute;
+      top: 1.2rem; right: 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--deep);
+      color: rgba(250,246,240,0.6);
+      padding: 3rem 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      border-top: 1px solid rgba(201,169,110,0.15);
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--cream);
+    }
+    .footer-logo span { color: var(--gold); font-style: italic; }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-links a {
+      color: rgba(250,246,240,0.5);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.75rem; }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 3rem 2rem; }
+      .hero-right { min-height: 40vh; }
+      section { padding: 4rem 2rem; }
+      .featured-grid { grid-template-columns: 1fr 1fr; }
+      .feat-card.large { grid-column: 1 / 3; grid-row: auto; }
+      #about { grid-template-columns: 1fr; gap: 3rem; }
+      .links-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Miss <span>Jaimmie's</span> Closet</a>
+    <ul class="nav-links">
+      <li><a href="#categories">Shop</a></li>
+      <li><a href="#featured">Featured</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="nav-shop-btn">Shop Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <p class="hero-eyebrow">✦ Gainesville, FL · Army Veteran · UF Graduate</p>
+      <h1 class="hero-title">
+        Style Finds<br>
+        You <em>Actually</em><br>
+        Want.
+      </h1>
+      <p class="hero-sub">
+        Jerseys, sneakers, designer bags, Stanleys, and more — all curated by Jaimmie. 
+        Posh Ambassador II with over 6,000 listings and thousands of happy buyers.
+      </p>
+      <div class="hero-cta-group">
+        <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="btn-primary">Shop Poshmark</a>
+        <a href="https://www.ebay.com/usr/shotty99" target="_blank" class="btn-secondary">Shop eBay</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">6,356</div>
+          <div class="stat-label">Listings</div>
+        </div>
+        <div>
+          <div class="stat-num">66K+</div>
+          <div class="stat-label">Followers</div>
+        </div>
+        <div>
+          <div class="stat-num">15%</div>
+          <div class="stat-label">Bundle Discount</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-pattern"></div>
+      <div class="hero-center-text">
+        <span class="big-initial">MJ</span>
+      </div>
+      <div class="posh-badge">✦ Posh Ambassador II</div>
+      <div class="hero-badge">
+        <span>New With Tags</span>
+        <span>Always Fresh</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span class="marquee-item">Jerseys <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Sneakers <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Designer Bags <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Stanley Tumblers <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Mitchell & Ness <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Nike <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Loungefly <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Bonnets & Hair Care <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Women's Fashion <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Men's Apparel <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Kids <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Jerseys <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Sneakers <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Designer Bags <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Stanley Tumblers <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Mitchell & Ness <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Nike <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Loungefly <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Bonnets & Hair Care <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Women's Fashion <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Men's Apparel <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Kids <span class="marquee-dot">·</span></span>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section id="categories">
+    <div class="section-header fade-up">
+      <div>
+        <p class="section-tag">Browse by Category</p>
+        <h2 class="section-title">Shop the <em>Closet</em></h2>
+      </div>
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="view-all">View All Listings →</a>
+    </div>
+    <div class="cat-grid fade-up">
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
+        <span class="cat-icon">👟</span>
+        <div class="cat-name">Sneakers</div>
+        <div class="cat-desc">Nike, Vans, Adidas & more</div>
+      </a>
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
+        <span class="cat-icon">🏀</span>
+        <div class="cat-name">Jerseys</div>
+        <div class="cat-desc">Mitchell & Ness, Nike authentic</div>
+      </a>
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
+        <span class="cat-icon">👜</span>
+        <div class="cat-name">Bags</div>
+        <div class="cat-desc">Loungefly, Coach, Michael Kors</div>
+      </a>
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
+        <span class="cat-icon">🥤</span>
+        <div class="cat-name">Stanleys</div>
+        <div class="cat-desc">40oz Quencher tumblers NWT</div>
+      </a>
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
+        <span class="cat-icon">👗</span>
+        <div class="cat-name">Women's</div>
+        <div class="cat-desc">Dresses, tops, activewear</div>
+      </a>
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
+        <span class="cat-icon">👕</span>
+        <div class="cat-name">Men's</div>
+        <div class="cat-desc">Hoodies, graphic tees, belts</div>
+      </a>
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
+        <span class="cat-icon">🎀</span>
+        <div class="cat-name">Bonnets</div>
+        <div class="cat-desc">Character & satin sleep caps</div>
+      </a>
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="cat-card">
+        <span class="cat-icon">✨</span>
+        <div class="cat-name">Accessories</div>
+        <div class="cat-desc">Scarves, belts, socks & more</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section id="featured">
+    <div class="section-header fade-up">
+      <div>
+        <p class="section-tag">Hand-Picked Finds</p>
+        <h2 class="section-title">Featured <em>Listings</em></h2>
+      </div>
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="view-all">See All →</a>
+    </div>
+    <div class="featured-grid fade-up">
+      <div class="feat-card large">
+        <div class="feat-img" style="background: linear-gradient(135deg, #E8C4B0, #C9856A); font-size: 6rem;">🏀</div>
+        <div class="feat-badge-nwt">NWT</div>
+        <div class="feat-info">
+          <div class="feat-brand">Mitchell & Ness</div>
+          <div class="feat-name">Scottie Pippen 97–98 Bulls #33 Authentic Jersey</div>
+          <div class="feat-price-row">
+            <span class="feat-price">$145</span>
+            <span class="feat-original">$300</span>
+          </div>
+          <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="shop-link">Shop Now →</a>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img" style="background: linear-gradient(135deg, #B8D4E8, #6A9BC9);">🥤</div>
+        <div class="feat-badge-nwt">NWT</div>
+        <div class="feat-info">
+          <div class="feat-brand">Stanley</div>
+          <div class="feat-name">40oz Black & Gold Quencher</div>
+          <div class="feat-price-row">
+            <span class="feat-price">$95</span>
+          </div>
+          <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="shop-link">Shop →</a>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img" style="background: linear-gradient(135deg, #E8D4B0, #C9A96E);">👜</div>
+        <div class="feat-badge-nwt">NWT</div>
+        <div class="feat-info">
+          <div class="feat-brand">Loungefly</div>
+          <div class="feat-name">Disney Dogs Wristlet</div>
+          <div class="feat-price-row">
+            <span class="feat-price">$35</span>
+          </div>
+          <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="shop-link">Shop →</a>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img" style="background: linear-gradient(135deg, #C9856A, #7A5C4F);">🏀</div>
+        <div class="feat-badge-nwt">NWT</div>
+        <div class="feat-info">
+          <div class="feat-brand">Nike</div>
+          <div class="feat-name">Kobe Swingman Mamba Mentality Jersey</div>
+          <div class="feat-price-row">
+            <span class="feat-price">$195</span>
+            <span class="feat-original">$349</span>
+          </div>
+          <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="shop-link">Shop →</a>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img" style="background: linear-gradient(135deg, #D4B0E8, #9A6AC9);">🎀</div>
+        <div class="feat-badge-nwt">NWT</div>
+        <div class="feat-info">
+          <div class="feat-brand">Stanley x Hello Kitty</div>
+          <div class="feat-name">40oz Red Quencher Tumbler</div>
+          <div class="feat-price-row">
+            <span class="feat-price">$95</span>
+          </div>
+          <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="shop-link">Shop →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="fade-up">
+      <p class="section-tag">The Story</p>
+      <h2 class="section-title" style="margin-bottom:2rem;">Meet <em>Jaimmie</em></h2>
+      <p class="about-text">
+        <strong>Army Veteran. UF Graduate. Go Gators.</strong> Jaimmie has built one of Gainesville's most trusted resale closets from the ground up — earning the <strong>Posh Ambassador II</strong> status with thousands of five-star transactions.
+      </p>
+      <p class="about-text">
+        Every listing is carefully sourced and accurately described. Whether you're hunting for a <strong>Mitchell & Ness authentic jersey</strong>, a rare Stanley tumbler, or the perfect Loungefly bag, the closet is stocked fresh with items that are almost always <strong>New With Tags</strong>.
+      </p>
+      <p class="about-text">
+        Bundle <strong>2 or more items</strong> for 15% off — because good deals should come in multiples.
+      </p>
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="btn-primary" style="margin-top:1rem;">Follow the Closet</a>
+    </div>
+    <div class="about-right fade-up">
+      <div class="about-stat">
+        <div class="about-stat-num">6,356</div>
+        <div class="about-stat-label">Active Listings</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">66K+</div>
+        <div class="about-stat-label">Followers</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">150K+</div>
+        <div class="about-stat-label">Shares</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-num">15%</div>
+        <div class="about-stat-label">Bundle Savings</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP LINKS -->
+  <section id="shop-links">
+    <div class="section-header fade-up">
+      <div>
+        <p class="section-tag">Find Us Online</p>
+        <h2 class="section-title">Shop <em>Everywhere</em></h2>
+      </div>
+    </div>
+    <div class="links-grid fade-up">
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank" class="link-card poshmark">
+        <div class="link-card-left">
+          <h3>Poshmark</h3>
+          <p>@missjaimmie · Posh Ambassador II · 6,356 listings</p>
+        </div>
+        <div class="link-arrow">→</div>
+        <div class="link-listings">15% bundle discount</div>
+      </a>
+      <a href="https://www.ebay.com/usr/shotty99" target="_blank" class="link-card ebay">
+        <div class="link-card-left">
+          <h3>eBay</h3>
+          <p>@shotty99 · Additional listings & deals</p>
+        </div>
+        <div class="link-arrow">→</div>
+        <div class="link-listings">More items available</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Miss <span>Jaimmie's</span> Closet</div>
+    <div class="footer-links">
+      <a href="https://poshmark.com/closet/missjaimmie" target="_blank">Poshmark</a>
+      <a href="https://www.ebay.com/usr/shotty99" target="_blank">eBay</a>
+      <a href="#categories">Categories</a>
+      <a href="#about">About</a>
+    </div>
+    <div class="footer-copy">© 2026 Miss Jaimmie's Closet · Gainesville, FL</div>
+  </footer>
+
+  <script>
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
