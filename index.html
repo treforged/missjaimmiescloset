@@ -15,6 +15,12 @@
       --charcoal: #1E1E1E;
       --gold: #C9A96E;
       --soft-gray: #F2EDE8;
+      /* Text-only variants of --rose/--gold. The originals are brand colours and
+         stay for borders, fills and decoration; as TEXT they measured 1.9-3.3:1,
+         below the WCAG AA 4.5:1 floor. These measure 4.57-5.94 and 4.86-5.79. */
+      --rose-text: #A8442F;
+      --gold-text: #7E6128;
+      --muted-text: #6B6B6B;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -36,10 +42,10 @@
     }
     nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.07); }
     .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--burgundy); text-decoration: none; z-index: 201; }
-    .nav-logo span { font-style: italic; color: var(--rose); }
+    .nav-logo span { font-style: italic; color: var(--rose-text); }
     .nav-links { display: none; gap: 2rem; list-style: none; }
     .nav-links a { text-decoration: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal); opacity: 0.7; transition: opacity 0.2s, color 0.2s; }
-    .nav-links a:hover { opacity: 1; color: var(--rose); }
+    .nav-links a:hover { opacity: 1; color: var(--rose-text); }
 
     /* Hamburger */
     .hamburger { display: flex; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 201; }
@@ -52,7 +58,7 @@
     .mobile-menu { display: none; position: fixed; inset: 0; z-index: 190; background: var(--cream); flex-direction: column; align-items: center; justify-content: safe center; gap: 2.2rem; overflow-y: auto; overscroll-behavior: contain; padding: 4.5rem 1.25rem 1.5rem; }
     .mobile-menu.open { display: flex; }
     .mobile-menu a { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--charcoal); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
-    .mobile-menu a:hover { color: var(--rose); }
+    .mobile-menu a:hover { color: var(--rose-text); }
     .mobile-menu-ctas { display: flex; flex-direction: column; gap: 0.75rem; align-items: stretch; width: 220px; margin-top: 0.5rem; }
 
     @media (min-width: 768px) {
@@ -63,25 +69,25 @@
 
     /* BUTTONS */
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.9rem 1.8rem; border-radius: 4px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.25s; cursor: pointer; border: none; }
-    .btn-primary { background: var(--rose); color: white; box-shadow: 0 4px 18px rgba(200,120,106,0.3); }
+    .btn-primary { background: var(--rose-text); color: white; box-shadow: 0 4px 18px rgba(168,68,47,0.3); }
     .btn-primary:hover { background: var(--burgundy); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(122,46,46,0.3); }
     .btn-outline { background: transparent; color: var(--charcoal); border: 1.5px solid rgba(30,30,30,0.25); }
-    .btn-outline:hover { border-color: var(--rose); color: var(--rose); transform: translateY(-2px); }
+    .btn-outline:hover { border-color: var(--rose-text); color: var(--rose-text); transform: translateY(-2px); }
     .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
 
     /* HERO */
     .hero { min-height: 100svh; padding: 7rem 1.25rem 3.5rem; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; gap: 2.5rem; }
     .hero::before { content: ''; position: absolute; top: -10%; right: -5%; width: 80%; height: 110%; background: radial-gradient(ellipse at 70% 40%, rgba(232,201,184,0.4) 0%, rgba(200,120,106,0.1) 55%, transparent 72%); pointer-events: none; }
     .hero-text { position: relative; z-index: 2; }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rose); margin-bottom: 1rem; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rose-text); margin-bottom: 1rem; }
     .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--rose); }
     h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 11vw, 5.5rem); font-weight: 300; line-height: 1.05; margin-bottom: 1.2rem; }
-    h1 em { font-style: italic; color: var(--rose); }
+    h1 em { font-style: italic; color: var(--rose-text); }
     .hero-sub { font-size: 0.95rem; line-height: 1.8; color: #555; margin-bottom: 1.8rem; }
     .hero-badges { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
     .badge { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.8rem; border-radius: 99px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; }
-    .badge-gold { background: rgba(201,169,110,0.15); color: var(--gold); border: 1px solid rgba(201,169,110,0.35); }
-    .badge-rose { background: rgba(200,120,106,0.12); color: var(--rose); border: 1px solid rgba(200,120,106,0.3); }
+    .badge-gold { background: rgba(201,169,110,0.15); color: var(--gold-text); border: 1px solid rgba(201,169,110,0.35); }
+    .badge-rose { background: rgba(200,120,106,0.12); color: var(--rose-text); border: 1px solid rgba(200,120,106,0.3); }
     .badge-burg { background: rgba(122,46,46,0.1); color: var(--burgundy); border: 1px solid rgba(122,46,46,0.25); }
     .cta-group { display: flex; flex-direction: column; gap: 0.85rem; }
     @media (min-width: 480px) { .cta-group { flex-direction: row; flex-wrap: wrap; } }
@@ -90,7 +96,7 @@
     .stats-card { background: white; border-radius: 16px; padding: 1.5rem 1rem; box-shadow: 0 8px 30px rgba(0,0,0,0.07); display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; position: relative; z-index: 2; }
     .stat-item { text-align: center; }
     .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--burgundy); line-height: 1; }
-    .stat-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #888; margin-top: 0.25rem; }
+    .stat-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-text); margin-top: 0.25rem; }
 
     @media (min-width: 768px) {
       .hero { flex-direction: row; align-items: center; padding: 8rem 5vw 4rem; }
@@ -105,9 +111,9 @@
     .section { padding: 4rem 1.25rem; }
     @media (min-width: 768px) { .section { padding: 6rem 5vw; } }
     .section-header { text-align: center; margin-bottom: 2.5rem; }
-    .section-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rose); margin-bottom: 0.7rem; }
+    .section-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rose-text); margin-bottom: 0.7rem; }
     h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 300; line-height: 1.15; }
-    h2 em { font-style: italic; color: var(--rose); }
+    h2 em { font-style: italic; color: var(--rose-text); }
 
     /* CATEGORIES */
     .categories-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; max-width: 900px; margin: 0 auto; }
@@ -127,7 +133,7 @@
     .platform-card:hover { transform: translateY(-5px); box-shadow: 0 24px 50px rgba(0,0,0,0.35); }
     .platform-card.poshmark { background: linear-gradient(135deg,#7B2D8B 0%,#C74B9A 100%); }
     .platform-card.ebay { background: linear-gradient(135deg,#0064D2 0%,#0FA34D 100%); }
-    .platform-card::after { content:'→'; position:absolute; top:1.75rem; right:1.75rem; font-size:1.1rem; color:rgba(255,255,255,0.4); transition:all 0.3s; }
+    .platform-card::after { content:'→'; position:absolute; top:1.75rem; right:1.75rem; font-size:1.1rem; color:rgba(255,255,255,0.68); transition:all 0.3s; }
     .platform-card:hover::after { color:white; right:1.35rem; }
     .platform-name { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:600; color:white; }
     .platform-handle { font-size:0.75rem; letter-spacing:0.06em; color:rgba(255,255,255,0.6); font-weight:500; }
@@ -137,32 +143,32 @@
 
     .referral-banner { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 1rem 1.25rem; margin: 1.5rem auto 0; max-width: 800px; text-align: center; }
     .referral-banner p { font-size: 0.88rem; color: rgba(255,255,255,0.8); line-height: 1.7; }
-    .referral-code { display: inline-block; background: var(--rose); color: white; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.14em; padding: 0.2rem 0.7rem; border-radius: 4px; }
+    .referral-code { display: inline-block; background: var(--rose-text); color: white; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.14em; padding: 0.2rem 0.7rem; border-radius: 4px; }
 
     /* SHIPPING */
     .shipping-section { background: var(--soft-gray); }
     .shipping-inner { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 2.5rem; }
     @media (min-width: 768px) { .shipping-inner { flex-direction: row; gap: 4rem; align-items: center; } }
     .shipping-text { flex: 1; }
-    .shipping-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(200,120,106,0.12); color: var(--rose); border: 1px solid rgba(200,120,106,0.3); border-radius: 99px; padding: 0.3rem 0.85rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .shipping-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(200,120,106,0.12); color: var(--rose-text); border: 1px solid rgba(200,120,106,0.3); border-radius: 99px; padding: 0.3rem 0.85rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem; }
     .shipping-text h2 { text-align: left; margin-bottom: 1rem; }
     .shipping-text p { font-size: 0.92rem; line-height: 1.8; color: #555; margin-bottom: 0.9rem; }
     .shipping-cards { flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
     .s-card { background: white; border-radius: 12px; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 0.9rem; box-shadow: 0 4px 14px rgba(0,0,0,0.05); }
     .s-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(200,120,106,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0; }
-    .s-label { font-size: 0.66rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#999; }
+    .s-label { font-size: 0.66rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted-text); }
     .s-value { font-size: 0.86rem; font-weight:500; color:var(--charcoal); margin-top:0.1rem; }
 
     /* POP-UPS */
     .popup-inner { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 2.5rem; }
     @media (min-width: 768px) { .popup-inner { flex-direction: row; gap: 4rem; align-items: center; } }
-    .popup-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(200,120,106,0.12); color: var(--rose); border: 1px solid rgba(200,120,106,0.3); border-radius: 99px; padding: 0.3rem 0.85rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .popup-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(200,120,106,0.12); color: var(--rose-text); border: 1px solid rgba(200,120,106,0.3); border-radius: 99px; padding: 0.3rem 0.85rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem; }
     .popup-inner h2 { text-align: left; margin-bottom: 1rem; }
     .popup-text { font-size: 0.92rem; line-height: 1.8; color: #555; margin-bottom: 1.4rem; }
     .popup-visual { flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
     .popup-info-card { background: white; border-radius: 12px; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 0.9rem; box-shadow: 0 4px 14px rgba(0,0,0,0.05); }
     .popup-info-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(200,120,106,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-    .popup-info-label { font-size:0.66rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#999; }
+    .popup-info-label { font-size:0.66rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted-text); }
     .popup-info-value { font-size:0.86rem; font-weight:500; color:var(--charcoal); margin-top:0.1rem; }
 
     /* ABOUT */
@@ -170,7 +176,7 @@
     .about-inner h2 { margin-bottom: 1.2rem; }
     .about-text { font-size: 0.94rem; line-height: 1.85; color: #555; margin-bottom: 1.8rem; }
     .about-pills { display: flex; gap: 0.65rem; justify-content: center; flex-wrap: wrap; }
-    .pill { padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.76rem; font-weight: 600; background: white; border: 1.5px solid rgba(200,120,106,0.3); color: var(--rose); }
+    .pill { padding: 0.4rem 1rem; border-radius: 99px; font-size: 0.76rem; font-weight: 600; background: white; border: 1.5px solid rgba(200,120,106,0.3); color: var(--rose-text); }
 
     /* CONTACT */
     .contact-section { background: var(--charcoal); padding: 4rem 1.25rem; }
@@ -184,17 +190,17 @@
     .contact-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.4rem 1.5rem; text-decoration: none; transition: background 0.25s, transform 0.25s; flex: 1; }
     .contact-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-3px); }
     .contact-card-icon { font-size: 1.6rem; margin-bottom: 0.55rem; }
-    .contact-card-label { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.3rem; }
+    .contact-card-label { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.68); margin-bottom: 0.3rem; }
     .contact-card-value { font-size: 0.88rem; font-weight: 500; color: white; word-break: break-all; }
     .wholesale-note { background: rgba(200,120,106,0.15); border: 1px solid rgba(200,120,106,0.3); border-radius: 10px; padding: 1rem 1.25rem; font-size: 0.84rem; color: rgba(255,255,255,0.72); line-height: 1.65; }
     .wholesale-note strong { color: var(--blush); }
 
     /* FOOTER */
-    footer { background: #111; color: rgba(255,255,255,0.4); padding: 1.6rem 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; text-align: center; font-size: 0.76rem; }
+    footer { background: #111; color: rgba(255,255,255,0.68); padding: 1.6rem 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; text-align: center; font-size: 0.76rem; }
     @media (min-width: 640px) { footer { flex-direction: row; justify-content: space-between; padding: 1.75rem 5vw; text-align: left; } }
     .footer-logo { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:white; font-style:italic; }
     .footer-links { display:flex; gap:1.25rem; }
-    footer a { color:rgba(255,255,255,0.4); text-decoration:none; transition:color 0.2s; }
+    footer a { color:rgba(255,255,255,0.68); text-decoration:none; transition:color 0.2s; }
     footer a:hover { color:var(--blush); }
 
     /* REVIEWS */
@@ -202,9 +208,9 @@
     .reviews-cards { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
     @media (min-width: 640px) { .reviews-cards { grid-template-columns: repeat(3, 1fr); } }
     .review-card { background: white; border-radius: 14px; padding: 1.75rem 1.5rem; box-shadow: 0 4px 18px rgba(0,0,0,0.05); border: 1px solid rgba(200,120,106,0.1); display: flex; flex-direction: column; gap: 0.8rem; }
-    .review-stars { color: var(--gold); font-size: 1rem; letter-spacing: 0.1em; }
+    .review-stars { color: var(--gold-text); font-size: 1rem; letter-spacing: 0.1em; }
     .review-text { font-size: 0.9rem; line-height: 1.7; color: #555; font-style: italic; flex: 1; }
-    .review-author { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #aaa; }
+    .review-author { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-text); }
 
     /* TRE FORGED */
     .treforged-section{background:var(--cream);padding:4rem 1.25rem;border-top:1px solid rgba(200,120,106,.15);}
@@ -213,7 +219,7 @@
     .treforged-inner h2{margin-bottom:1rem;}
     .treforged-desc{font-size:.94rem;line-height:1.8;color:#555;margin-bottom:.75rem;}
     .treforged-discount{display:inline-block;background:rgba(200,120,106,.08);border:1.5px dashed var(--rose);border-radius:8px;padding:.7rem 1.4rem;font-size:.86rem;font-weight:600;color:var(--burgundy);margin:1.25rem 0 2rem;letter-spacing:.01em;}
-    .treforged-discount span{color:var(--rose);}
+    .treforged-discount span{color:var(--rose-text);}
     .treforged-btns{display:flex;flex-direction:column;gap:.85rem;align-items:center;}
     @media(min-width:480px){.treforged-btns{flex-direction:row;justify-content:center;}}
   </style>
@@ -336,7 +342,7 @@
         <div class="shipping-tag">🚚 Shipping Info</div>
         <h2>Shipping <em>Across the US</em></h2>
         <p>MissJaimmie's Closet ships exclusively within the United States via Poshmark and eBay for easy, protected transactions. All orders are packed with care and shipped promptly.</p>
-        <p>For bulk orders, wholesale pricing, or reseller inquiries, email us at <strong><a href="mailto:missjaimmie@gmail.com" style="color:var(--rose);text-decoration:none;">missjaimmie@gmail.com</a></strong> for a custom quote.</p>
+        <p>For bulk orders, wholesale pricing, or reseller inquiries, email us at <strong><a href="mailto:missjaimmie@gmail.com" style="color:var(--rose-text);text-decoration:none;">missjaimmie@gmail.com</a></strong> for a custom quote.</p>
         <a href="mailto:missjaimmie@gmail.com" class="btn btn-primary" style="margin-top:0.75rem;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Contact for Wholesale
@@ -346,7 +352,7 @@
         <div class="s-card"><div class="s-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" style="width:32px;height:16px;border-radius:2px;display:inline-block;vertical-align:middle;"><rect width="60" height="30" fill="#B22234"/><rect y="2.3" width="60" height="2.3" fill="white"/><rect y="6.9" width="60" height="2.3" fill="white"/><rect y="11.5" width="60" height="2.3" fill="white"/><rect y="16.2" width="60" height="2.3" fill="white"/><rect y="20.8" width="60" height="2.3" fill="white"/><rect y="25.4" width="60" height="2.3" fill="white"/><rect width="24" height="16.2" fill="#3C3B6E"/><text x="2" y="6" font-size="4" fill="white">&#9733;&#9733;&#9733;&#9733;&#9733;</text><text x="2" y="10.5" font-size="4" fill="white">&#9733;&#9733;&#9733;&#9733;</text><text x="2" y="15" font-size="4" fill="white">&#9733;&#9733;&#9733;&#9733;&#9733;</text></svg></div><div><div class="s-label">Ships To</div><div class="s-value">United States only</div></div></div>
         <div class="s-card"><div class="s-icon">📦</div><div><div class="s-label">Platform Shipping</div><div class="s-value">Via Poshmark &amp; eBay — easy &amp; protected</div></div></div>
         <div class="s-card"><div class="s-icon">🏷️</div><div><div class="s-label">Wholesale / Bulk</div><div class="s-value">Custom pricing — contact us</div></div></div>
-        <div class="s-card"><div class="s-icon">✉️</div><div><div class="s-label">Contact</div><div class="s-value"><a href="mailto:missjaimmie@gmail.com" style="color:var(--rose);text-decoration:none;">missjaimmie@gmail.com</a></div></div></div>
+        <div class="s-card"><div class="s-icon">✉️</div><div><div class="s-label">Contact</div><div class="s-value"><a href="mailto:missjaimmie@gmail.com" style="color:var(--rose-text);text-decoration:none;">missjaimmie@gmail.com</a></div></div></div>
       </div>
     </div>
   </section>
@@ -394,7 +400,7 @@
         </div>
       </div>
       <div style="text-align:center;margin-top:2.5rem;">
-        <p style="font-size:0.9rem;color:#777;margin-bottom:1rem;">Over 5,000+ happy customers and counting.</p>
+        <p style="font-size:0.9rem;color:var(--muted-text);margin-bottom:1rem;">Over 5,000+ happy customers and counting.</p>
         <a href="https://poshmark.com/closet/6330b8b167755dff6ace0e68/love-notes" target="_blank" rel="noopener" class="btn btn-primary">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
           See All Reviews on Poshmark
@@ -476,7 +482,7 @@
   <footer>
     <div>
       <div class="footer-logo">MissJaimmie's Closet</div>
-      <div style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin-top:0.25rem;">DBA of SIBREY ENTERPRISE, LLC · Gainesville, FL · Veteran-Owned</div>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.62);margin-top:0.25rem;">DBA of SIBREY ENTERPRISE, LLC · Gainesville, FL · Veteran-Owned</div>
     </div>
     <div style="font-size:0.72rem;text-align:center;line-height:1.6;">
       &copy; 2023 SIBREY ENTERPRISE, LLC. All rights reserved.<br>DBA MissJaimmie's Closet
