@@ -184,6 +184,15 @@ reachable and 0 items under the nav bar. Positive controls green in the same run
 
 ## Resume queue
 
+**FIRST UP NEXT TIME, one thing:** run `_tools/verify-domain.ps1`. If it exits
+0, Tre has done the DNS move — then `git mv _tools/CNAME.ready CNAME`, commit,
+push, and re-run it. If it exits 1, nothing here has changed and this desk is
+still idle; do not chase him. If it exits 2, the check could not tell and the
+instrument is the thing to fix first.
+
+Measured 2026-09-15 ~15:0x UTC, last act of that session: **exit 1**, 0 of 3 TLS
+stacks, control green. So as of then the move had NOT happened.
+
 - [ ] **Waiting on Tre only: the DNS move.** The fork is CLOSED — he said
   2026-09-15 he is moving the domain into Cloudflare and will say when it is
   done, so this repo is the one that will be served. **Do not touch DNS and do
