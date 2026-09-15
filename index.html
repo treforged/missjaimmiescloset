@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Curated fashion resale from Gainesville, FL. Rare jerseys, designer bags, Stanley cups and shoes, handpicked by MissJaimmie and shipped across the US." />
   <title>MissJaimmie's Closet – SIBREY ENTERPRISE, LLC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -24,6 +25,12 @@
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+      .js-loaded .reveal { opacity: 1 !important; transform: none !important; }
+    }
     body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
 
     /* REVEAL – visible by default; JS adds .js-loaded for animation */
@@ -259,6 +266,7 @@
   </div>
 
   <!-- HERO -->
+  <main id="main">
   <section class="hero" id="top">
     <div class="hero-text">
       <div class="hero-eyebrow">Curator · Reseller · Veteran-Owned</div>
@@ -479,6 +487,8 @@
   </section>
 
   <!-- FOOTER -->
+  </main>
+
   <footer>
     <div>
       <div class="footer-logo">MissJaimmie's Closet</div>
