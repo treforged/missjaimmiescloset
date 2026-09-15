@@ -110,6 +110,13 @@ foreach ($p in '_tools/verify-domain.ps1','_tools/CNAME.ready','_tools/README.md
 }
 ```
 
-Result as of 2026-09-15, run after the deploy that added this folder: recorded
-in the commit that follows this one. Re-check it if this repo is ever switched
-to a `workflow` build, which does not use Jekyll and would publish this folder.
+**Result, 2026-09-15:** all three paths return 404, and `index.html` returns
+200 in the same run. That positive control matters — without it a 404 could
+just mean the build had not landed yet, which is exactly what happened on the
+first attempt: the check was run while
+`gh api .../pages/builds/latest` still said `"status": "building"`, so the
+404s proved nothing. Confirm the build reports `built` for the commit you care
+about *before* trusting a 404.
+
+Re-check all of this if the repo is ever switched to a `workflow` build, which
+does not use Jekyll and would publish this folder.

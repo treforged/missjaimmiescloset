@@ -37,12 +37,29 @@ fine in the same browser, same network, same minute (200, 30 links), and
 **The repo itself is healthy.** The deployed Pages copy is **byte-identical** to
 `HEAD:index.html` — sha256 `1d39cf67…d806ab3b` on both sides.
 
-### Fixing it needs Tre (registrar credentials + a decision)
+### The fork is closed; only the DNS move is outstanding
 
-The repo half is one file (`CNAME`). The other half is DNS at register.com or
-the Square/Weebly domain settings, both his accounts. CLAUDE.md also forbids DNS
-changes without him. **Deliberately not started** — see "Actions for Tre" in the
-session report.
+Tre, 2026-09-15: *"I haven't fixed it to where I can put it into my Cloudflare
+yet. I will let you know when I do update that."* So the intent is settled —
+the domain is going to Cloudflare and will point at this Pages site. **Do not
+touch DNS, and do not chase him for it.**
+
+Prepared and waiting in `_tools/`:
+
+- **`CNAME.ready`** — the CNAME file, **deliberately not active**. Committing it
+  as `/CNAME` today would take the site down: a CNAME file sets the custom
+  domain, Pages then 301-redirects `treforged.github.io/missjaimmiescloset/` to
+  it, and `https_enforced` is `true` against a domain that currently refuses the
+  TLS handshake. Activation and undo are one command each; see
+  `_tools/README.md`.
+- **`verify-domain.ps1`** — checks from OUTSIDE when he reports the move.
+  Three TLS stacks, a positive control, and a body comparison so a 200 from the
+  Square placeholder cannot read as success. Proven `exit 1` / `exit 0` /
+  `exit 2` before it was committed.
+
+A third independent confirmation of the outage came out of building it:
+python/OpenSSL returns `SSLV3_ALERT_HANDSHAKE_FAILURE`, alongside schannel's
+`SEC_E_ILLEGAL_MESSAGE` and Chrome's `ERR_SSL_VERSION_OR_CIPHER_MISMATCH`.
 
 ## State
 
@@ -167,16 +184,20 @@ reachable and 0 items under the nav bar. Positive controls green in the same run
 
 ## Resume queue
 
-- [ ] **Blocked on Tre: point the domain at the Pages site** (or decide the
-  Weebly/Square site is the intended one instead). Needs registrar credentials
-  and a genuine fork-in-intent call. Everything else here is unblocked.
+- [ ] **Waiting on Tre only: the DNS move.** The fork is CLOSED — he said
+  2026-09-15 he is moving the domain into Cloudflare and will say when it is
+  done, so this repo is the one that will be served. **Do not touch DNS and do
+  not chase him.** The repo side is already prepared:
+  `_tools/CNAME.ready` (deliberately NOT active — activating it early takes the
+  site down, see `_tools/README.md`) and `_tools/verify-domain.ps1` to check
+  from outside when he reports it.
 - [ ] **Nothing queued.** The accessibility backlog is cleared; this desk is
   idle apart from the domain item above.
 
 <!-- AUTO-SNAPSHOT:BEGIN - machine-written, replaced each compaction -->
 ## Auto-snapshot
 
-_Written 2026-09-15 10:17 by handoff_hook. Everything below this heading is
+_Written 2026-09-15 11:06 by handoff_hook. Everything below this heading is
 machine-generated and replaced each time; put durable notes above it._
 
 - **Branch:** `main`
@@ -187,14 +208,14 @@ machine-generated and replaced each time; put durable notes above it._
 - **Recent commits:**
 
 ```
+3c237e8 docs: record the contrast, landmark, meta and reduced-motion work
+db5f3a1 feat: main landmark, meta description, and prefers-reduced-motion
+e10051c fix: bring all body text to WCAG AA contrast (24 failing styles -> 0)
+5f3e950 docs: record the category-grid fix and its measured trade-off
+be4091d fix: category grid was wider than its container on narrow phones
 73e36ef fix: mobile drawer trapped its own first and last items on short phones
 5afd7dd docs: this repo gets a charter and a named executive (Iris)
 733526e Add files via upload
-7fea0cf Add files via upload
-78a7fcf Add files via upload
-af0452e Add files via upload
-9fbfd84 Add files via upload
-e35e07f Add files via upload
 ```
 
 <!-- AUTO-SNAPSHOT:END -->
