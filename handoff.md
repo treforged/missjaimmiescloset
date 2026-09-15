@@ -125,30 +125,53 @@ wrap to two lines. Three one-line columns genuinely do not fit there (3 x 100.7
 only by overflowing. Shrinking the type and dropping to two columns were both
 tried and measured worse. 414px and above is identical to before.
 
+### Also fixed: contrast, landmark, meta description, reduced motion
+
+- **Contrast (bd/see log): 24 failing styles -> 0**, worst ratio 1.88 -> 4.57,
+  same 160 elements examined both sides. Cause was palette colours used as TEXT
+  (`--rose` 2.54-3.31, `--gold` 1.72-2.24, greys, white at 30-40% on #111).
+  Fixed with **text-only variants** — `--rose-text #A8442F`, `--gold-text
+  #7E6128`, `--muted-text #6B6B6B` — leaving the brand colours untouched for
+  borders and fills (7 decorative `var(--rose)` uses remain).
+  **Visible change:** the primary button and rose accents are a deeper
+  terracotta. One `git revert` undoes it if Jaimmie prefers the lighter rose.
+- **`<main>`** wraps all 9 sections (nav/footer outside). Zero layout change —
+  document height and every section offset identical at 375px and 1280px.
+- **Meta description** added, 150 chars. There was none.
+- **`prefers-reduced-motion`** disables smooth scroll, collapses transitions to
+  0.01ms and forces `.reveal` to its final state. Proven by rewriting the media
+  condition and reading the cascade: opacity 0->1, transform ->none, scroll
+  smooth->auto, transition 0.6s->1e-05s. **Not proven: that the OS setting
+  reaches the page** — the media feature is supported here but the system
+  preference cannot be flipped from this harness.
+
+**Verified on the LIVE deployed Pages build**, not just locally: at 375x667,
+320x600 and 1280x900 — 0 contrast failures, no horizontal overflow, 1 `<main>`,
+reduced-motion rule present, drawer scrollable with first and last item
+reachable and 0 items under the nav bar. Positive controls green in the same run
+(black-on-white 21, white-on-white 1).
+
 ## Still open
 
-- **27 text styles below WCAG AA contrast** on the Pages copy. Worst real ones:
-  `.review-author` 2.32, `.shipping-tag` 2.54, the footer DBA line 2.67, the
-  contact email link 2.84 (all need 4.5). **Caveat: some of the 27 are emoji**
-  (`✉️ 1.45`, `🚚`, `📍`) which ignore CSS `color`, so they are false positives —
-  do not quote 27 as a defect count without re-checking which are real.
-  ⚠️ The first version of this probe reported **every** hit as exactly `1.00`
-  because it treated a semi-transparent same-hue tint as an opaque background
-  and compared text to itself. Composite alpha down to white, and give the probe
-  positive controls (black/white must be 21, white/white must be 1) before
-  believing any number it prints.
-- No `<main>` landmark, no meta description, no `prefers-reduced-motion`
-  handling (the page has reveal animations + `scroll-behavior:smooth`).
-- No Lighthouse run — there is no headless browser wired up here.
+- **No Lighthouse run** — there is no headless browser wired up here, and this
+  repo must stay dependency-free, so a Playwright/Lighthouse install would need
+  Tre's say-so. The checks above were driven through the Chrome tools instead.
+- **Two emoji nodes score below AA** (`✉️` 1.45, and the tag emoji). Emoji
+  ignore CSS `color`, so these are instrument artefacts, **not defects** — do
+  not "fix" them and do not count them.
+- **Focus styles are the browser default.** Nothing removes outlines
+  (`outline: none` appears 0 times), so keyboard focus is visible but unstyled.
+  A designed `:focus-visible` ring would be an improvement, not a fix.
+- **Tap targets**: 15 controls are under 44px (AAA 2.5.5); all clear the 24px
+  AA floor of 2.5.8. Not a failure.
 
 ## Resume queue
 
 - [ ] **Blocked on Tre: point the domain at the Pages site** (or decide the
   Weebly/Square site is the intended one instead). Needs registrar credentials
   and a genuine fork-in-intent call. Everything else here is unblocked.
-- [ ] Contrast pass on the genuine sub-AA styles, emoji excluded. **Report the
-  number actually fixed — the ~27 figure is not a defect count.**
-- [ ] Add `<main>`, a meta description, and a `prefers-reduced-motion` block.
+- [ ] **Nothing queued.** The accessibility backlog is cleared; this desk is
+  idle apart from the domain item above.
 
 <!-- AUTO-SNAPSHOT:BEGIN - machine-written, replaced each compaction -->
 ## Auto-snapshot
