@@ -49,7 +49,7 @@
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* Mobile drawer */
-    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 190; background: var(--cream); flex-direction: column; align-items: center; justify-content: center; gap: 2.2rem; }
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 190; background: var(--cream); flex-direction: column; align-items: center; justify-content: safe center; gap: 2.2rem; overflow-y: auto; overscroll-behavior: contain; padding: 4.5rem 1.25rem 1.5rem; }
     .mobile-menu.open { display: flex; }
     .mobile-menu a { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--charcoal); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
     .mobile-menu a:hover { color: var(--rose); }
@@ -232,7 +232,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
     </button>
   </nav>
@@ -497,11 +497,15 @@
     function openMenu() {
       mobileMenu.classList.add('open');
       hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      hamburger.setAttribute('aria-label', 'Close menu');
       document.body.style.overflow = 'hidden';
     }
     function closeMenu() {
       mobileMenu.classList.remove('open');
       hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open menu');
       document.body.style.overflow = '';
     }
 
