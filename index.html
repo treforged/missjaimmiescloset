@@ -110,13 +110,13 @@
     h2 em { font-style: italic; color: var(--rose); }
 
     /* CATEGORIES */
-    .categories-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; max-width: 900px; margin: 0 auto; }
-    @media (min-width: 560px) { .categories-grid { grid-template-columns: repeat(4, 1fr); } }
-    @media (min-width: 900px) { .categories-grid { grid-template-columns: repeat(6, 1fr); } }
-    .cat-card { background: white; border-radius: 12px; padding: 1.3rem 0.75rem; text-align: center; transition: all 0.3s; border: 1px solid rgba(0,0,0,0.05); }
+    .categories-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; max-width: 900px; margin: 0 auto; }
+    @media (min-width: 560px) { .categories-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    @media (min-width: 900px) { .categories-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+    .cat-card { background: white; border-radius: 12px; padding: 1.3rem 0.5rem; text-align: center; transition: all 0.3s; border: 1px solid rgba(0,0,0,0.05); min-width: 0; }
     .cat-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(200,120,106,0.12); border-color: rgba(200,120,106,0.2); }
     .cat-icon { font-size: 1.8rem; margin-bottom: 0.55rem; display: block; }
-    .cat-name { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--charcoal); }
+    .cat-name { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--charcoal); overflow-wrap: anywhere; }
 
     /* PLATFORMS */
     .platforms { background: var(--charcoal); padding: 4rem 1.25rem; }
