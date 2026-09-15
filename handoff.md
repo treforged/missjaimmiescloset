@@ -197,7 +197,7 @@ reachable and 0 items under the nav bar. Positive controls green in the same run
 <!-- AUTO-SNAPSHOT:BEGIN - machine-written, replaced each compaction -->
 ## Auto-snapshot
 
-_Written 2026-09-15 11:06 by handoff_hook. Everything below this heading is
+_Written 2026-09-15 14:03 by handoff_hook. Everything below this heading is
 machine-generated and replaced each time; put durable notes above it._
 
 - **Branch:** `main`
@@ -208,14 +208,14 @@ machine-generated and replaced each time; put durable notes above it._
 - **Recent commits:**
 
 ```
+34c38b7 docs: record that _tools is excluded from the published site, measured
+b0bc47b chore: prepare the custom domain and an outside verifier, without activating
 3c237e8 docs: record the contrast, landmark, meta and reduced-motion work
 db5f3a1 feat: main landmark, meta description, and prefers-reduced-motion
 e10051c fix: bring all body text to WCAG AA contrast (24 failing styles -> 0)
 5f3e950 docs: record the category-grid fix and its measured trade-off
 be4091d fix: category grid was wider than its container on narrow phones
 73e36ef fix: mobile drawer trapped its own first and last items on short phones
-5afd7dd docs: this repo gets a charter and a named executive (Iris)
-733526e Add files via upload
 ```
 
 <!-- AUTO-SNAPSHOT:END -->
