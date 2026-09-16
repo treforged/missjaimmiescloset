@@ -1,0 +1,126 @@
+# Activates the custom domain the moment DNS actually points at GitHub Pages.
+#
+# WHY THIS EXISTS. The cutover needs two things to be true: DNS must point at
+# Pages, and this repo must carry a /CNAME file naming the domain. Only the
+# first is Tre's. This workflow does the second, so the cutover is ONE action
+# he takes at the registrar and nothing else has to be coordinated.
+#
+# ORDER MATTERS AND IS DELIBERATE. Committing /CNAME early takes the site down:
+# Pages would 301 treforged.github.io/missjaimmiescloset/ to a domain with no
+# certificate. So the file waits at _tools/CNAME.ready and this job moves it
+# only after measuring that DNS has moved. See _tools/README.md.
+#
+# THE CONTROL IS THE LOAD-BEARING PART. A resolver that cannot answer returns
+# nothing, which looks exactly like "DNS has not moved yet" - so without a
+# control this job would stay green forever while being structurally unable to
+# ever fire. It therefore resolves treforged.github.io first, whose addresses
+# are known, and FAILS RED if that control does not come back. A run that
+# proves nothing must not look like a run that proved "not yet".
+#
+# UNDO: git rm CNAME && git commit && git push - Pages drops the custom domain.
+name: Activate custom domain when DNS points at Pages
+
+on:
+  schedule:
+    # GitHub delays and drops short crons under load; treat this as "roughly
+    # every 10-30 minutes", not a guarantee. workflow_dispatch forces a run.
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Decide whether DNS has moved
+        id: check
+        run: |
+          set -euo pipefail
+
+          PAGES_IPS=(185.199.108.153 185.199.109.153 185.199.110.153 185.199.111.153)
+
+          in_pages_set() {
+            local needle="$1" ip
+            for ip in "${PAGES_IPS[@]}"; do
+              [[ "$needle" == "$ip" ]] && return 0
+            done
+            return 1
+          }
+
+          # --- Already done? Then there is nothing to do, and nothing to check.
+          if [[ -f CNAME ]]; then
+            echo "CNAME is already at the repo root - the domain is active. Nothing to do."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [[ ! -f _tools/CNAME.ready ]]; then
+            echo "FAILED - neither CNAME nor _tools/CNAME.ready exists. Nothing to activate."
+            exit 1
+          fi
+
+          # --- POSITIVE CONTROL. A blind resolver must go RED, never "not yet".
+          CONTROL_DOMAIN="treforged.github.io"
+          CONTROL_ADDRS="$(dig +short A "$CONTROL_DOMAIN" @1.1.1.1 || true)"
+          echo "Control ($CONTROL_DOMAIN) resolved:"
+          echo "${CONTROL_ADDRS:-  <nothing>}"
+
+          control_ok=false
+          for ip in $CONTROL_ADDRS; do
+            if in_pages_set "$ip"; then control_ok=true; fi
+          done
+
+          if [[ "$control_ok" != true ]]; then
+            echo "CONTROL FAILED - the resolver did not return a known Pages address."
+            echo "This run proves NOTHING about the real domain. Failing red on purpose."
+            exit 1
+          fi
+          echo "Control passed - the resolver is answering and can see Pages addresses."
+
+          # --- The real question.
+          TARGET="$(tr -d '[:space:]' < _tools/CNAME.ready)"
+          if [[ -z "$TARGET" ]]; then
+            echo "FAILED - _tools/CNAME.ready is empty, so there is no domain to activate."
+            exit 1
+          fi
+          echo "Target domain: $TARGET"
+
+          TARGET_ADDRS="$(dig +short A "$TARGET" @1.1.1.1 || true)"
+          echo "Target ($TARGET) resolved:"
+          echo "${TARGET_ADDRS:-  <nothing>}"
+
+          if [[ -z "$TARGET_ADDRS" ]]; then
+            echo "NOT READY - no A records. The control passed, so this is the domain, not the resolver."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Ready means: at least one address is a Pages address, and NONE is not.
+          any_pages=false
+          any_foreign=false
+          for ip in $TARGET_ADDRS; do
+            if in_pages_set "$ip"; then any_pages=true; else any_foreign=true; fi
+          done
+
+          if [[ "$any_pages" == true && "$any_foreign" != true ]]; then
+            echo "READY - every A record is a GitHub Pages address."
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "NOT READY - the domain still resolves somewhere other than Pages."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Activate the custom domain
+        if: steps.check.outputs.ready == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git mv _tools/CNAME.ready CNAME
+          git commit -m "chore: activate the custom domain, DNS now points at Pages"
+          git push origin main
+          echo "Activated. Pages will rebuild; allow a few minutes, then a certificate is issued."
