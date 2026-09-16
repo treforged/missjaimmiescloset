@@ -33,7 +33,56 @@ Two things follow:
 
 So activating early does not "get ahead of the work". It takes the site down.
 
-### Activation, once Tre says DNS is on Cloudflare and pointing at Pages
+### Activation is AUTOMATIC. Nobody does this by hand any more.
+
+`.github/workflows/activate-custom-domain.yml` runs on a schedule, resolves the
+apex, and performs the `git mv` itself the moment `missjaimmiescloset.com`
+resolves to the four GitHub Pages addresses. **Tre's registrar edit is the whole
+cutover** — there is no second step to coordinate and no message to relay.
+
+The records he changes are in [`CUTOVER.md`](./CUTOVER.md).
+
+**Reading the workflow's runs, and the one reading that is a trap:**
+
+```sh
+gh run list --workflow=activate-custom-domain.yml --limit 1
+```
+
+- **green** — the check ran and said *not yet*. This is the normal state.
+- **red** — the *resolver* failed, so the run proves **nothing about the
+  domain**. Fix the instrument. Do not read a red as "not yet".
+
+That distinction is the reason the job carries a positive control: a resolver
+that cannot answer returns an empty list, which is indistinguishable from a
+domain that has not moved. Without the control this job would sit green for
+ever while being structurally incapable of ever firing. It resolves
+`treforged.github.io` first — whose addresses are known — and exits non-zero if
+that does not come back.
+
+Proven before it was committed, six outcomes, each able to fail:
+
+| Case | Result |
+| --- | --- |
+| resolver blind | **exit 1, RED** — "this run proves NOTHING" |
+| domain still at Weebly (the real value that day) | not ready |
+| domain returns no A records | not ready |
+| all four Pages addresses | **READY** — the only case that activates |
+| `/CNAME` already present | nothing to do |
+| mixed Pages + foreign addresses | not ready |
+
+Exercised live on 2026-09-16 (run `35126787324`): the control returned the four
+real Pages addresses, the target returned `199.34.228.66`, and it reported NOT
+READY on a **green** run.
+
+**Still unexercised:** the `git push` itself, which cannot run until DNS
+actually moves — so it runs for the first time on the day it matters.
+
+### Doing it by hand, if the workflow is ever disabled
+
+GitHub disables scheduled workflows on a repository with no activity for 60
+days. If that has happened, the manual sequence still works — and the warning
+at the top of this section still applies, so **only once DNS already points at
+Pages**:
 
 ```sh
 git mv _tools/CNAME.ready CNAME
@@ -117,6 +166,20 @@ first attempt: the check was run while
 `gh api .../pages/builds/latest` still said `"status": "building"`, so the
 404s proved nothing. Confirm the build reports `built` for the commit you care
 about *before* trusting a 404.
+
+**Re-confirmed 2026-09-16**, after `.github/` and `_tools/CUTOVER.md` were
+added, and only once `pages/builds/latest` reported `"status": "built"` for the
+commit that added them:
+
+```
+.github/workflows/activate-custom-domain.yml   404
+_tools/CUTOVER.md                              404
+index.html                                     200   <- positive control
+```
+
+The 200 in the same run is what makes the 404s mean "excluded" rather than
+"the build has not landed". `.github` is dot-prefixed, which Jekyll also
+excludes, so the workflow is not published either.
 
 Re-check all of this if the repo is ever switched to a `workflow` build, which
 does not use Jekyll and would publish this folder.
