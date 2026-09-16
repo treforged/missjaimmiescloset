@@ -184,29 +184,54 @@ reachable and 0 items under the nav bar. Positive controls green in the same run
 
 ## Resume queue
 
-**FIRST UP NEXT TIME, one thing:** run `_tools/verify-domain.ps1`. If it exits
-0, Tre has done the DNS move — then `git mv _tools/CNAME.ready CNAME`, commit,
-push, and re-run it. If it exits 1, nothing here has changed and this desk is
-still idle; do not chase him. If it exits 2, the check could not tell and the
-instrument is the thing to fix first.
+**FIRST UP NEXT TIME, one thing:** nothing, unless Tre says the DNS is moved.
+The activation is now **automatic** - `.github/workflows/activate-custom-domain.yml`
+watches the apex every ~10-30 minutes and commits `/CNAME` itself the moment
+`missjaimmiescloset.com` resolves to the four GitHub Pages addresses. There is
+no longer a second action for anyone here to remember.
 
-Measured 2026-09-15 ~15:0x UTC, last act of that session: **exit 1**, 0 of 3 TLS
-stacks, control green. So as of then the move had NOT happened.
+If you want to know the state right now, read the last run:
+`gh run list --workflow=activate-custom-domain.yml --limit 1`. A **green** run
+means the check ran and said not-yet. A **red** run means the *resolver* failed
+and the run proved nothing - fix the instrument, do not read it as "not yet".
 
-- [ ] **Waiting on Tre only: the DNS move.** The fork is CLOSED — he said
-  2026-09-15 he is moving the domain into Cloudflare and will say when it is
-  done, so this repo is the one that will be served. **Do not touch DNS and do
-  not chase him.** The repo side is already prepared:
-  `_tools/CNAME.ready` (deliberately NOT active — activating it early takes the
-  site down, see `_tools/README.md`) and `_tools/verify-domain.ps1` to check
-  from outside when he reports it.
-- [ ] **Nothing queued.** The accessibility backlog is cleared; this desk is
-  idle apart from the domain item above.
+Measured 2026-09-16, and this is the state the whole desk turns on:
+
+- The public site is **broken, not merely stale**. `https://` fails the TLS
+  handshake on the apex and on `www` (curl exit 35, status 000, no-follow), and
+  `http://www` returns **200** with a 583-byte Weebly placeholder reading
+  *"Thanks for purchasing - This temporary landing page will be replaced when
+  you publish your site."* There is no old site to preserve.
+- Apex `A` = `199.34.228.66` (Weebly/Square behind Cloudflare), **TTL 14400**.
+  `www` is an **A record, not a CNAME**. NS are register.com's four.
+- **Google Workspace mail is LIVE** on the domain - five MX at `aspmx.l.google.com`
+  and `alt1-4`. A DNS move that does not carry those kills her email. This is the
+  single most important fact in this file.
+- **No TXT records at all**, so **no SPF**; no DMARC, no `google._domainkey`
+  DKIM. Recorded, deliberately NOT acted on - deliverability on a live business
+  mailbox is its own decision.
+- The Pages target is healthy: `treforged.github.io/missjaimmiescloset/` returns
+  **200 no-follow**, 40,542 bytes, `sha256` byte-identical to `index.html`,
+  valid TLS, built at the current commit.
+
+- [x] **The cutover is now ONE action Tre takes at the registrar.** Written up
+  in **`_tools/CUTOVER.md`** - exact rows to delete and add, the register.com
+  screen, propagation, email impact, and what could not be verified without his
+  access. Recommended path is editing A/CNAME rows at register.com rather than
+  a nameserver move to Cloudflare: two minutes, zero email risk, and Cloudflare
+  can still follow later on its own.
+- [ ] **Waiting on Tre only: the DNS edit.** Do not touch DNS and do not chase
+  him. Everything on this side is done and proven.
+- [ ] **Unexercised, and it will first run on the day it matters:** the
+  workflow's `git push` step. Its decision logic is proven in all six
+  directions, but the push cannot be exercised until DNS actually moves. Undo
+  if it misfires is `git rm CNAME` and a push.
+- [ ] **Nothing else queued.** The accessibility backlog is cleared.
 
 <!-- AUTO-SNAPSHOT:BEGIN - machine-written, replaced each compaction -->
 ## Auto-snapshot
 
-_Written 2026-09-15 14:03 by handoff_hook. Everything below this heading is
+_Written 2026-09-15 17:15 by handoff_hook. Everything below this heading is
 machine-generated and replaced each time; put durable notes above it._
 
 - **Branch:** `main`
@@ -217,14 +242,14 @@ machine-generated and replaced each time; put durable notes above it._
 - **Recent commits:**
 
 ```
+536b9b7 docs: name the one thing that is first up next session
+9de1298 docs: refresh handoff auto-snapshot
 34c38b7 docs: record that _tools is excluded from the published site, measured
 b0bc47b chore: prepare the custom domain and an outside verifier, without activating
 3c237e8 docs: record the contrast, landmark, meta and reduced-motion work
 db5f3a1 feat: main landmark, meta description, and prefers-reduced-motion
 e10051c fix: bring all body text to WCAG AA contrast (24 failing styles -> 0)
 5f3e950 docs: record the category-grid fix and its measured trade-off
-be4091d fix: category grid was wider than its container on narrow phones
-73e36ef fix: mobile drawer trapped its own first and last items on short phones
 ```
 
 <!-- AUTO-SNAPSHOT:END -->
