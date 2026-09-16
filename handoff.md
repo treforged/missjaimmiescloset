@@ -231,7 +231,7 @@ Measured 2026-09-16, and this is the state the whole desk turns on:
 <!-- AUTO-SNAPSHOT:BEGIN - machine-written, replaced each compaction -->
 ## Auto-snapshot
 
-_Written 2026-09-15 17:15 by handoff_hook. Everything below this heading is
+_Written 2026-09-16 13:16 by handoff_hook. Everything below this heading is
 machine-generated and replaced each time; put durable notes above it._
 
 - **Branch:** `main`
@@ -242,14 +242,14 @@ machine-generated and replaced each time; put durable notes above it._
 - **Recent commits:**
 
 ```
+46ad459 docs: record the measured state of the live domain and the automatic cutover
+b59ed1d feat: make the domain cutover one action Tre takes at the registrar
 536b9b7 docs: name the one thing that is first up next session
 9de1298 docs: refresh handoff auto-snapshot
 34c38b7 docs: record that _tools is excluded from the published site, measured
 b0bc47b chore: prepare the custom domain and an outside verifier, without activating
 3c237e8 docs: record the contrast, landmark, meta and reduced-motion work
 db5f3a1 feat: main landmark, meta description, and prefers-reduced-motion
-e10051c fix: bring all body text to WCAG AA contrast (24 failing styles -> 0)
-5f3e950 docs: record the category-grid fix and its measured trade-off
 ```
 
 <!-- AUTO-SNAPSHOT:END -->
