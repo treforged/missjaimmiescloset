@@ -225,6 +225,26 @@ on the strength of a measurement taken today.
    pushes went out today). Commit `63a2ebd`. Reported to Sam, who was already
    working the machine-wide sign-out question.
 
+**A RENDERED layout gate now exists**: `scripts/check-layout.mjs` (commit
+`5dc88ac`), measuring document and grid overflow plus track spread at 320 / 360
+/ 375 / 414 / 768 / 1280px. Run it as:
+
+```sh
+PLAYWRIGHT_PKG=file:///C:/Users/tvonh/Desktop/TRE-Forged/getforgenta/node_modules/playwright/index.mjs   node scripts/check-layout.mjs --repo .
+```
+
+Proven in four arms; the red one restores the REAL pre-fix state and reproduces
+the 27px / 23.3px figures recorded above from a different instrument.
+**It is NOT in CI** - the page's fonts come from Google and the defect is driven
+by text width, so a runner without them measures different numbers and could cry
+wolf on every push. It prints which fonts actually resolved; wire it up only
+after reading that line on a real runner.
+
+⚠ **If you ever mutate to re-prove it, REVERT ALL THREE halves of the fix**
+(`minmax(0, 1fr)`, `.cat-card min-width: 0`, `.cat-name overflow-wrap: anywhere`).
+The first two remove the min-content floor by different routes, so reverting one
+leaves the gate GREEN - measured, not assumed.
+
 **A pre-commit secret guard now runs in this repo** (commit `59870a9`), copied
 byte-identical from tre-forged-conductor. The pre-push hook that lived in
 `.git/hooks/` was MOVED into `.githooks/` first, so setting
