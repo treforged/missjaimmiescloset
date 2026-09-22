@@ -225,6 +225,28 @@ on the strength of a measurement taken today.
    pushes went out today). Commit `63a2ebd`. Reported to Sam, who was already
    working the machine-wide sign-out question.
 
+**SHARING THE LINK NOW PRODUCES A CARD** (`9cca0b7`). The page had ZERO Open
+Graph and Twitter tags, so every share - Instagram bio, Facebook, iMessage -
+rendered as a bare grey URL. That is the one thing a link-hub site cannot afford
+and no gate could see it. Share copy is REUSED from `<title>` and the meta
+description so there is one wording to keep true, and
+`scripts/check-share-card.mjs` asserts they stay equal, reading the PARSED DOM
+rather than the file as text. Proven red two ways (MISSING and DRIFT).
+
+⚠ **NO `og:image`, and this one is worth ASKING Tre rather than assuming.** The
+repo has no image asset and inventing brand artwork for her business is a taste
+call, not a mechanical fix. Without it the card still shows title and
+description; with a 1200x630 image it would show a picture, which for a fashion
+resale closet is probably worth real clicks. `twitter:card` is `summary` and
+must become `summary_large_image` IF an image is ever added.
+
+**A NEGATIVE, so nobody re-chases it:** the outbound store links were checked.
+Poshmark 200 on both. **eBay's 403 is NOT a broken link** - ebay.com's own
+homepage, a seller that certainly exists and a seller that certainly does not
+ALL return 403 to the same request, so the instrument cannot discriminate. An
+automated eBay link check is not possible from here; only a human opening it
+settles it.
+
 **THE ACCEPTANCE TEST FOR THE CUTOVER IS `_tools/verify-domain.ps1`** (commit
 `c574e47`, closing Sam's ask `2ceafd1c`). Run it rather than opening the site in
 a browser - a browser caches the apex-to-www redirect and shows a working site
