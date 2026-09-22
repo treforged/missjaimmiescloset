@@ -72,14 +72,26 @@ minutes and GitHub does not honour that on a quiet repo. Measured over 38 runs
 between 2026-09-16 and 2026-09-22, the real gap between checks was **two to
 seven hours**, and it never once checked within half an hour.
 
-So: make the edit, close the tab, and expect the site later the same day. If
-you want it now, any session can force the check and it takes seconds:
+So: make the edit, close the tab, and expect the site later the same day.
+**Tell whoever is at this desk that you have moved the DNS** and they will try
+to force it; if they cannot, the schedule still does it by itself.
+
+Forcing it is one command, and it takes seconds:
 
 ```sh
 gh workflow run activate-custom-domain.yml
 ```
 
-Tell whoever is at this desk that you have moved the DNS and they will run it.
+> **Measured 2026-09-22: that command does NOT work on this machine right now.**
+> `gh`'s stored token is invalid, so every write is refused. The reads still
+> succeed and that is a trap rather than a reassurance - this repo is **public**,
+> so `gh run list` answers with no credential at all and looks healthy. Proven by
+> asking for something that needs auth: `gh api user` returns *Requires
+> authentication*, and a private repo returns 404.
+>
+> Until someone runs `gh auth login`, the schedule is the only route and the
+> wait is the two-to-seven hours above. Nothing is lost by waiting - the
+> workflow is doing the right thing, just slowly.
 
 ---
 

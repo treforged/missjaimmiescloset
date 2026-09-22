@@ -62,6 +62,25 @@ control. It is safe to run at any time: if DNS has not moved the job measures
 that and does nothing, and if `CNAME` is already in place it exits early. There
 is no state to corrupt by running it too often.
 
+**It needs a working `gh` login, and on 2026-09-22 this machine did not have
+one.** `gh auth status` reads *the token in default is invalid*, and the
+dispatch fails `HTTP 401`.
+
+**Do not read a successful `gh run list` as proof the login works.** This repo
+is **public**, so gh falls through to an unauthenticated request and the reads
+answer normally with no credential involved. That is why the breakage is
+invisible from the command anyone would naturally try. The discriminating
+checks, both run here:
+
+```sh
+gh api user                      # Requires authentication  -> not logged in
+gh api repos/treforged/dot-claude  # 404 on a PRIVATE repo  -> not logged in
+```
+
+`git push` is unaffected - it goes over SSH, which authenticates fine
+(`ssh -T git@github.com` greets `treforged`). Two transports, two answers; a
+claim about one is not a claim about the other.
+
 **Reading the workflow's runs, and the one reading that is a trap:**
 
 ```sh
