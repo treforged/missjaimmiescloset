@@ -38,6 +38,55 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="MissJaimmie's Closet – SIBREY ENTERPRISE, LLC" />
   <meta name="twitter:description" content="Curated fashion resale from Gainesville, FL. Rare jerseys, designer bags, Stanley cups and shoes, handpicked by MissJaimmie and shipped across the US." />
+
+  <!--
+    STRUCTURED DATA. Every claim below is one this page ALREADY STATES in
+    public - the name and legal entity from the <title>, the description and
+    the Gainesville, FL locality from the meta description, and the two store
+    links from the buttons. Nothing here is new information about her business,
+    it is the same information made machine-readable so search engines can show
+    the closet properly.
+
+    DELIBERATELY ABSENT, and each omission is a decision:
+      - NO aggregateRating or review markup. The page shows star glyphs, but
+        there is no verifiable rating value or review count behind them.
+        Self-serving review markup is against Google's guidelines and risks a
+        manual action against HER site. A missing rating costs nothing; a
+        fabricated one is the kind of mistake that is expensive and slow to
+        undo.
+      - NO street address, geo, telephone or opening hours. The page states a
+        CITY and nothing more, and this is a resale closet with no visitable
+        storefront - so "Organization", never "LocalBusiness", which implies a
+        place customers can turn up at.
+      - NO logo. The repo has no image asset; same reason og:image is absent.
+        See ask 10b83d09.
+      - NO listing or follower counts. "2K+" and "66K+" are approximations on
+        the page and no schema field carries them honestly.
+  -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MissJaimmie's Closet",
+  "legalName": "SIBREY ENTERPRISE, LLC",
+  "description": "Curated fashion resale from Gainesville, FL. Rare jerseys, designer bags, Stanley cups and shoes, handpicked by MissJaimmie and shipped across the US.",
+  "url": "https://missjaimmiescloset.com/",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Gainesville",
+    "addressRegion": "FL",
+    "addressCountry": "US"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "sameAs": [
+    "https://poshmark.com/closet/missjaimmie",
+    "https://www.ebay.com/usr/missjaimmiescloset"
+  ]
+}
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
