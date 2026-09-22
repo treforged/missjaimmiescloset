@@ -195,6 +195,43 @@ If you want to know the state right now, read the last run:
 means the check ran and said not-yet. A **red** run means the *resolver* failed
 and the run proved nothing - fix the instrument, do not read it as "not yet".
 
+**RE-MEASURED 2026-09-22 and unchanged** - confirmed today rather than
+repeated from the reading below. `https://` apex and `www` both fail the TLS
+handshake (curl exit 35, status 000, no-follow), `http://www` still serves the
+583-byte Weebly placeholder, the apex still resolves to `199.34.228.66`, the
+five MX rows are still live, and the Pages target still returns 200 / 40,542
+bytes / sha256 byte-identical to `index.html`. So the item below says "still"
+on the strength of a measurement taken today.
+
+**TWO THINGS LANDED 2026-09-22 that change what a cold session should expect:**
+
+1. **The cron's "every ~10-30 minutes" was never measured and is FALSE.**
+   Across 38 scheduled runs 2026-09-16 to 2026-09-22 the gap between fires ran
+   **min 118 / median 194 / max 423 minutes** - 6.7 runs a day against the 144
+   that `*/10` asks for, and **all 37 gaps exceeded 30 minutes**. So after Tre's
+   registrar edit the site comes up in **two to seven hours** unforced, not half
+   an hour. Corrected in the workflow header, `_tools/README.md`,
+   `_tools/CUTOVER.md` and this file (commit `deca6ff`). The cron was
+   deliberately NOT shortened - GitHub drops short crons on quiet repos whatever
+   the expression says.
+
+2. **`gh workflow run` - the way to force it - DOES NOT WORK on this machine.**
+   `gh auth status` reads *the token in default is invalid*; the dispatch
+   returns HTTP 401. **Do not test this with `gh run list`:** this repo is
+   PUBLIC, so gh falls through to an unauthenticated request and the reads look
+   perfectly healthy. `gh api user` returns *Requires authentication* and a
+   private repo returns 404 - those discriminate, the read does not. `git push`
+   is unaffected (SSH; `ssh -T git@github.com` greets treforged, and three
+   pushes went out today). Commit `63a2ebd`. Reported to Sam, who was already
+   working the machine-wide sign-out question.
+
+**A pre-commit secret guard now runs in this repo** (commit `59870a9`), copied
+byte-identical from tre-forged-conductor. The pre-push hook that lived in
+`.git/hooks/` was MOVED into `.githooks/` first, so setting
+`core.hooksPath --local` did not shadow it - git resolves pre-push to
+`.githooks/pre-push`, proven both ways. Undo:
+`git config --local --unset core.hooksPath`.
+
 Measured 2026-09-16, and this is the state the whole desk turns on:
 
 - The public site is **broken, not merely stale**. `https://` fails the TLS
