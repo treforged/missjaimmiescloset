@@ -279,11 +279,19 @@ Measured 2026-09-16, and this is the state the whole desk turns on:
   can still follow later on its own.
 - [ ] **Waiting on Tre only: the DNS edit.** Do not touch DNS and do not chase
   him. Everything on this side is done and proven.
-- [ ] **Unexercised, and it will first run on the day it matters:** the
-  workflow's `git push` step. Its decision logic is proven in all six
-  directions, but the push cannot be exercised until DNS actually moves. Undo
-  if it misfires is `git rm CNAME` and a push.
-- [ ] **Nothing else queued.** The accessibility backlog is cleared.
+- [~] **Still unexercised, but materially de-risked 2026-09-22 (`5b67397`).**
+  The push cannot truly run until DNS moves. What WAS found and fixed: from a
+  detached HEAD `git push origin main` **exits 0 and pushes nothing**, measured
+  in a throwaway repo - so the job could have gone green, printed "Activated",
+  and left `CNAME` unpushed. Both forms exit 0, so `set -euo pipefail` cannot
+  see it. Now pushes `HEAD:main` (correct in both states) and **reads back from
+  origin**, refusing to claim success unless `origin/main` carries the commit
+  and `CNAME` is actually there. Proven both ways.
+  **NOT verified: whether actions/checkout leaves the runner detached.** Run
+  logs need admin auth and gh's token here is invalid (HTTP 403). The question
+  was removed rather than answered. Undo: `git rm CNAME` and a push.
+- [ ] **Nothing else queued.** The accessibility backlog is cleared, and the
+  layout and secret gates above are new since it was.
 
 <!-- AUTO-SNAPSHOT:BEGIN - machine-written, replaced each compaction -->
 ## Auto-snapshot
