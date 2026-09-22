@@ -233,12 +233,26 @@ description so there is one wording to keep true, and
 `scripts/check-share-card.mjs` asserts they stay equal, reading the PARSED DOM
 rather than the file as text. Proven red two ways (MISSING and DRIFT).
 
+**STRUCTURED DATA SHIPPED** (`86b2581`): a JSON-LD `Organization` block, every
+claim already stated publicly on the page. **The omissions are the work** - no
+`aggregateRating` (star glyphs on the page have no verifiable value behind them,
+and self-serving review markup risks a manual action against HER site), no
+street address or `LocalBusiness` type (the page states a city and there is no
+visitable storefront), no logo, no follower counts. Verified by parsing the DOM
+in a browser, not by grepping.
+
 ⚠ **NO `og:image`, and this one is worth ASKING Tre rather than assuming.** The
 repo has no image asset and inventing brand artwork for her business is a taste
 call, not a mechanical fix. Without it the card still shows title and
 description; with a 1200x630 image it would show a picture, which for a fashion
 resale closet is probably worth real clicks. `twitter:card` is `summary` and
 must become `summary_large_image` IF an image is ever added.
+**Filed as ask `10b83d09` (needs_tre) with a recommendation**: do not generate
+artwork - ask Jaimmie for one photo she already uses on Poshmark, since she has
+real product photography and it is already her brand.
+**The same decision covers the FAVICON**, which is also absent (`rel="icon"` 0),
+so the tab and any bookmark show a blank default icon. One image decision
+unblocks both; they are not two questions.
 
 **A NEGATIVE, so nobody re-chases it:** the outbound store links were checked.
 Poshmark 200 on both. **eBay's 403 is NOT a broken link** - ebay.com's own
@@ -335,25 +349,29 @@ Measured 2026-09-16, and this is the state the whole desk turns on:
 <!-- AUTO-SNAPSHOT:BEGIN - machine-written, replaced each compaction -->
 ## Auto-snapshot
 
-_Written 2026-09-22 09:23 by handoff_hook. Everything below this heading is
+_Written 2026-09-22 14:48 by handoff_hook. Everything below this heading is
 machine-generated and replaced each time; put durable notes above it._
 
 - **Branch:** `main`
 - **vs upstream:** 0 ahead, 0 behind
 
-- **Working tree:** clean
+- **Uncommitted (1 file(s)):**
+
+```
+M handoff.md
+```
 
 - **Recent commits:**
 
 ```
+0831686 docs: record the share card, the og:image question, and the eBay negative
+9cca0b7 feat: sharing the link now produces a readable card, not a bare grey URL
+12349f1 docs: record the cutover acceptance test and its mutation trap
+c574e47 feat: the domain verifier now reads DNS, so it can say WHOSE turn it is
 f843c4d docs: mark the push step de-risked, and name what stayed unverified
 5b67397 fix: the activation push could have succeeded while pushing nothing
 754c70c docs: record the layout gate and how to re-prove it
 5dc88ac feat: a RENDERED guard for the narrow-viewport layout
-af65a19 docs: record today's re-measurement and the two findings a cold session needs
-63a2ebd docs: the escape hatch I documented an hour ago does not work on this machine
-deca6ff docs: the cutover's "10-30 minutes" was never measured, and it is false
-59870a9 feat: refuse a commit from this repo that carries a credential
 ```
 
 <!-- AUTO-SNAPSHOT:END -->
