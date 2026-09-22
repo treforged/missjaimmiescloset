@@ -5,6 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Curated fashion resale from Gainesville, FL. Rare jerseys, designer bags, Stanley cups and shoes, handpicked by MissJaimmie and shipped across the US." />
   <title>MissJaimmie's Closet – SIBREY ENTERPRISE, LLC</title>
+  <link rel="canonical" href="https://missjaimmiescloset.com/" />
+
+  <!--
+    SHARE CARD. This page's whole job is sending people to the Poshmark and eBay
+    closets, and the way that traffic actually arrives is somebody SHARING THE
+    LINK - an Instagram bio, a Facebook post, an iMessage. Before 2026-09-22
+    there was not one Open Graph or Twitter tag here, so every one of those
+    shares rendered as a bare grey URL: no title, no description, nothing to
+    click. Invisible from the repo, which is why it survived.
+
+    Title and description are reused from the <title> and meta description above
+    rather than reworded, so there is ONE copy of this wording to keep true.
+
+    og:url is the DOMAIN, not the current treforged.github.io address, because
+    the domain is where this page is meant to live and where shares should point
+    once DNS moves. See _tools/CUTOVER.md.
+
+    No og:image yet - the repo has no image asset, and inventing brand artwork is
+    a taste call rather than a mechanical fix. Without one, Facebook, iMessage
+    and Slack still show the title and description, which is the difference
+    between a bare URL and a readable card. twitter:card is therefore "summary",
+    NOT "summary_large_image", which requires an image and degrades badly
+    without one.
+  -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="MissJaimmie's Closet" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://missjaimmiescloset.com/" />
+  <meta property="og:title" content="MissJaimmie's Closet – SIBREY ENTERPRISE, LLC" />
+  <meta property="og:description" content="Curated fashion resale from Gainesville, FL. Rare jerseys, designer bags, Stanley cups and shoes, handpicked by MissJaimmie and shipped across the US." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="MissJaimmie's Closet – SIBREY ENTERPRISE, LLC" />
+  <meta name="twitter:description" content="Curated fashion resale from Gainesville, FL. Rare jerseys, designer bags, Stanley cups and shoes, handpicked by MissJaimmie and shipped across the US." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
