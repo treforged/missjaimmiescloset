@@ -62,6 +62,31 @@ can still happen afterwards, on its own, with the site already working.
 
 ---
 
+## How anyone checks whether it worked
+
+**Do not judge it by opening the site in a browser.** A browser caches the
+apex-to-www redirect and will happily show you a working page when it is not
+working for anybody else.
+
+Run this instead, from the repo root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File _tools/verify-domain.ps1
+```
+
+It reads DNS, then tries https on three independent TLS stacks, then checks
+*whose* page came back - and it tells the four states apart rather than saying a
+flat "not working":
+
+| It says | Meaning |
+| --- | --- |
+| `THE REGISTRAR EDIT HAS NOT BEEN DONE YET` | the apex is still on Weebly - this one is yours |
+| `DNS HAS MOVED - THIS IS THE NORMAL WAIT` | it worked; the certificate is still being issued |
+| `SERVING THIS REPO` | done, and the page is genuinely ours |
+| `CANNOT TELL` | the instrument failed - not a finding about the site |
+
+---
+
 ## After you press save, nothing else is yours to do
 
 A workflow in this repo watches the domain and switches the site on by itself.
