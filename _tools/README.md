@@ -42,6 +42,26 @@ cutover** — there is no second step to coordinate and no message to relay.
 
 The records he changes are in [`CUTOVER.md`](./CUTOVER.md).
 
+**HOW LONG IT ACTUALLY TAKES, measured rather than assumed.** The cron asks for
+every 10 minutes. GitHub does not honour it. Over 38 scheduled runs from
+2026-09-16 to 2026-09-22 the gap between fires was **min 118 / median 194 / max
+423 minutes** - 6.7 runs a day against the 144 the expression asks for, and
+**every one of the 37 gaps exceeded 30 minutes**.
+
+So after the registrar edit, left alone, the site comes up somewhere between
+**two and seven hours** later - not in half an hour. Nobody should sit watching.
+
+**Do not wait for the schedule. Force it:**
+
+```sh
+gh workflow run activate-custom-domain.yml
+```
+
+That fires in seconds and runs exactly the same checks, including the positive
+control. It is safe to run at any time: if DNS has not moved the job measures
+that and does nothing, and if `CNAME` is already in place it exits early. There
+is no state to corrupt by running it too often.
+
 **Reading the workflow's runs, and the one reading that is a trap:**
 
 ```sh

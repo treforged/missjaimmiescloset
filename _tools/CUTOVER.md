@@ -62,6 +62,27 @@ can still happen afterwards, on its own, with the site already working.
 
 ---
 
+## After you press save, nothing else is yours to do
+
+A workflow in this repo watches the domain and switches the site on by itself.
+You do not have to tell anyone, and there is no second step.
+
+**But do not sit and watch for it.** The schedule asks GitHub to check every 10
+minutes and GitHub does not honour that on a quiet repo. Measured over 38 runs
+between 2026-09-16 and 2026-09-22, the real gap between checks was **two to
+seven hours**, and it never once checked within half an hour.
+
+So: make the edit, close the tab, and expect the site later the same day. If
+you want it now, any session can force the check and it takes seconds:
+
+```sh
+gh workflow run activate-custom-domain.yml
+```
+
+Tell whoever is at this desk that you have moved the DNS and they will run it.
+
+---
+
 ## What breaks during propagation, and for how long
 
 - **The apex A record's TTL is 14,400 seconds — four hours.** Resolvers that

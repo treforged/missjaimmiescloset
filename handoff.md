@@ -186,7 +186,7 @@ reachable and 0 items under the nav bar. Positive controls green in the same run
 
 **FIRST UP NEXT TIME, one thing:** nothing, unless Tre says the DNS is moved.
 The activation is now **automatic** - `.github/workflows/activate-custom-domain.yml`
-watches the apex every ~10-30 minutes and commits `/CNAME` itself the moment
+watches the apex and commits `/CNAME` itself the moment
 `missjaimmiescloset.com` resolves to the four GitHub Pages addresses. There is
 no longer a second action for anyone here to remember.
 

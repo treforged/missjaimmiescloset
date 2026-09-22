@@ -22,8 +22,23 @@ name: Activate custom domain when DNS points at Pages
 
 on:
   schedule:
-    # GitHub delays and drops short crons under load; treat this as "roughly
-    # every 10-30 minutes", not a guarantee. workflow_dispatch forces a run.
+    # THIS CRON IS ASPIRATIONAL AND GITHUB DOES NOT HONOUR IT. Measured over
+    # 38 scheduled runs, 2026-09-16 to 2026-09-22: the gap between fires ran
+    # min 118 / median 194 / max 423 MINUTES - 6.7 runs a day against the 144
+    # that '*/10' asks for. ALL 37 gaps exceeded 30 minutes; the fastest fire
+    # in six days was just under two hours.
+    #
+    # An earlier version of this comment said "roughly every 10-30 minutes".
+    # That was never measured and is false. It matters because Tre makes the
+    # registrar edit and then watches: told half an hour, he would conclude
+    # after 40 minutes that the automation is broken, on the single action this
+    # whole repo is waiting for.
+    #
+    # DO NOT "FIX" THIS BY SHORTENING THE CRON. GitHub drops short crons on
+    # low-traffic repos under load whatever the expression says, so a smaller
+    # number buys nothing and would re-state the same false promise.
+    # workflow_dispatch is the real answer and it fires in seconds:
+    #   gh workflow run activate-custom-domain.yml
     - cron: '*/10 * * * *'
   workflow_dispatch:
 
