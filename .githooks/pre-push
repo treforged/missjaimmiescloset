@@ -1,0 +1,18 @@
+#!/bin/sh
+# push guard - the logic is INLINE below.
+#
+# The header used to point at scripts/push-guard.mjs, which does NOT exist in
+# this repo - it is the conductor's. A pointer to a file that is not here reads
+# as a missing dependency and sends the next reader hunting. The check is four
+# lines of shell and needs nothing else.
+#
+# Refuses a push from an unattended job. Nothing leaves this machine without a
+# person. An interactive terminal does not set CONDUCTOR_JOB and is unaffected.
+if [ -n "${CONDUCTOR_JOB}" ]; then
+  echo "" >&2
+  echo "REFUSED: an unattended job may not push." >&2
+  echo "Commit freely — the work stays here and the board offers Tre a Push button." >&2
+  echo "" >&2
+  exit 1
+fi
+exit 0
