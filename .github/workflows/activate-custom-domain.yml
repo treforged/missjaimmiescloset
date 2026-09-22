@@ -137,5 +137,36 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git mv _tools/CNAME.ready CNAME
           git commit -m "chore: activate the custom domain, DNS now points at Pages"
-          git push origin main
+
+          # `HEAD:main`, NOT `main`, and the difference is not cosmetic.
+          #
+          # MEASURED 2026-09-22 in a throwaway local repo: from a DETACHED HEAD,
+          # `git push origin main` pushes the local `main` REF - which is still
+          # sitting at the pre-detach commit - so it EXITS 0 AND PUSHES NOTHING.
+          # origin keeps the old tree and the command reports success. `set -e`
+          # cannot see it, because nothing failed.
+          #
+          # That is the worst possible shape for THIS step: it is the one action
+          # the whole repo waits on, it runs exactly once, and a silent no-op
+          # would leave CNAME unpushed while the log below says "Activated."
+          #
+          # Whether actions/checkout leaves us detached was NOT verified - run
+          # logs need admin auth this machine does not currently have. So the
+          # question is removed rather than answered: `HEAD:main` is correct in
+          # BOTH states, proven both ways in that same local test.
+          git push origin HEAD:main
+
+          # VERIFY BY CONTENTS, never by the push's exit code - see above for
+          # why the exit code is not evidence here.
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "REFUSED TO CLAIM SUCCESS: the push reported OK but origin/main"
+            echo "does not carry this commit. CNAME has NOT been activated."
+            exit 1
+          fi
+          git show origin/main:CNAME > /dev/null || {
+            echo "REFUSED TO CLAIM SUCCESS: CNAME is not present on origin/main."
+            exit 1
+          }
+          echo "Verified on origin/main: $(git show origin/main:CNAME)"
           echo "Activated. Pages will rebuild; allow a few minutes, then a certificate is issued."
