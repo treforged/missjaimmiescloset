@@ -225,6 +225,23 @@ on the strength of a measurement taken today.
    pushes went out today). Commit `63a2ebd`. Reported to Sam, who was already
    working the machine-wide sign-out question.
 
+**THE ACCEPTANCE TEST FOR THE CUTOVER IS `_tools/verify-domain.ps1`** (commit
+`c574e47`, closing Sam's ask `2ceafd1c`). Run it rather than opening the site in
+a browser - a browser caches the apex-to-www redirect and shows a working site
+when it is not. It now reads DNS **before** the TLS stacks, so it distinguishes
+four states that used to print one message:
+
+| verdict | meaning |
+| --- | --- |
+| `THE REGISTRAR EDIT HAS NOT BEEN DONE YET` | apex still on Weebly - Tre's |
+| `DNS HAS MOVED - THIS IS THE NORMAL WAIT` | it worked, certificate pending |
+| `SERVING THIS REPO` | done, and the body is genuinely ours |
+| `CANNOT TELL` | instrument failure, not a finding |
+
+All four proven by mutation, byte-exact restores. **The first `pages` mutation
+proved NOTHING** - it added the apex address to `PAGES` but left it in `WEEBLY`,
+which is tested first, so the branch never flipped. Both sets must move.
+
 **A RENDERED layout gate now exists**: `scripts/check-layout.mjs` (commit
 `5dc88ac`), measuring document and grid overflow plus track spread at 320 / 360
 / 375 / 414 / 768 / 1280px. Run it as:
@@ -296,7 +313,7 @@ Measured 2026-09-16, and this is the state the whole desk turns on:
 <!-- AUTO-SNAPSHOT:BEGIN - machine-written, replaced each compaction -->
 ## Auto-snapshot
 
-_Written 2026-09-16 13:16 by handoff_hook. Everything below this heading is
+_Written 2026-09-22 09:23 by handoff_hook. Everything below this heading is
 machine-generated and replaced each time; put durable notes above it._
 
 - **Branch:** `main`
@@ -307,14 +324,14 @@ machine-generated and replaced each time; put durable notes above it._
 - **Recent commits:**
 
 ```
-46ad459 docs: record the measured state of the live domain and the automatic cutover
-b59ed1d feat: make the domain cutover one action Tre takes at the registrar
-536b9b7 docs: name the one thing that is first up next session
-9de1298 docs: refresh handoff auto-snapshot
-34c38b7 docs: record that _tools is excluded from the published site, measured
-b0bc47b chore: prepare the custom domain and an outside verifier, without activating
-3c237e8 docs: record the contrast, landmark, meta and reduced-motion work
-db5f3a1 feat: main landmark, meta description, and prefers-reduced-motion
+f843c4d docs: mark the push step de-risked, and name what stayed unverified
+5b67397 fix: the activation push could have succeeded while pushing nothing
+754c70c docs: record the layout gate and how to re-prove it
+5dc88ac feat: a RENDERED guard for the narrow-viewport layout
+af65a19 docs: record today's re-measurement and the two findings a cold session needs
+63a2ebd docs: the escape hatch I documented an hour ago does not work on this machine
+deca6ff docs: the cutover's "10-30 minutes" was never measured, and it is false
+59870a9 feat: refuse a commit from this repo that carries a credential
 ```
 
 <!-- AUTO-SNAPSHOT:END -->
