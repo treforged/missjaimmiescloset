@@ -4,6 +4,17 @@ Snapshot of what is true right now. Read in full at session start; keep it a
 snapshot, not a log — edit it in place rather than appending a section per
 session.
 
+## Shops linked from the page (2026-10-03)
+
+The page links THREE shops: Poshmark, eBay and **Vinted**
+(`https://www.vinted.com/member/3185780307-missjaimmie`, added on Tre's ask in
+`6f62aa2`, shipping copy fixed in `8b6abfd`). Vinted appears in 4 anchors (hero
+CTA, mobile menu, the third `#shop` card, the footer) and in the JSON-LD `sameAs`.
+`.platform-cards` now goes to a row at 860px (was 600px) so three cards fit.
+**Adding a fourth shop: update all 4 anchors, `sameAs`, AND the shipping copy**
+in the Shipping section, which names the platforms in prose. That prose was the
+part missed on the first pass.
+
 ## ⚠️ THE DOMAIN DOES NOT SERVE THIS REPO, AND https IS BROKEN
 
 Measured 2026-09-15 by Iris. **Three premises previously recorded in this file
@@ -349,7 +360,7 @@ Measured 2026-09-16, and this is the state the whole desk turns on:
 <!-- AUTO-SNAPSHOT:BEGIN - machine-written, replaced each compaction -->
 ## Auto-snapshot
 
-_Written 2026-09-22 14:48 by handoff_hook. Everything below this heading is
+_Written 2026-10-03 18:53 by handoff_hook. Everything below this heading is
 machine-generated and replaced each time; put durable notes above it._
 
 - **Branch:** `main`
@@ -364,14 +375,14 @@ M handoff.md
 - **Recent commits:**
 
 ```
+6f62aa2 feat: add her Vinted shop as a third place to buy
+3e58295 docs: record the structured data and fold the favicon into the image decision
+86b2581 feat: structured data, so search engines can show the closet properly
 0831686 docs: record the share card, the og:image question, and the eBay negative
 9cca0b7 feat: sharing the link now produces a readable card, not a bare grey URL
 12349f1 docs: record the cutover acceptance test and its mutation trap
 c574e47 feat: the domain verifier now reads DNS, so it can say WHOSE turn it is
 f843c4d docs: mark the push step de-risked, and name what stayed unverified
-5b67397 fix: the activation push could have succeeded while pushing nothing
-754c70c docs: record the layout gate and how to re-prove it
-5dc88ac feat: a RENDERED guard for the narrow-viewport layout
 ```
 
 <!-- AUTO-SNAPSHOT:END -->
