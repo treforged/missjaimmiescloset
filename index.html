@@ -22,12 +22,14 @@
     the domain is where this page is meant to live and where shares should point
     once DNS moves. See _tools/CUTOVER.md.
 
-    No og:image yet - the repo has no image asset, and inventing brand artwork is
-    a taste call rather than a mechanical fix. Without one, Facebook, iMessage
-    and Slack still show the title and description, which is the difference
-    between a bare URL and a readable card. twitter:card is therefore "summary",
-    NOT "summary_large_image", which requires an image and degrades badly
-    without one.
+    og:image is og-image.jpg: one of Jaimmie's own Poshmark listing photos (the
+    Haddonfield baseball jersey), padded to 1200x630 in its own background
+    colour - a real product photo she already publishes, not generated art
+    (Tre, 2026-10-07: "you choose the image"). Its URL is the github.io address
+    rather than the domain, because the domain still serves Weebly and a
+    scraper must be able to fetch the image TODAY; after the DNS cutover
+    github.io redirects to the domain, so the same URL keeps working.
+    twitter:card is "summary_large_image" now that an image exists.
   -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="MissJaimmie's Closet" />
@@ -35,7 +37,14 @@
   <meta property="og:url" content="https://missjaimmiescloset.com/" />
   <meta property="og:title" content="MissJaimmie's Closet – SIBREY ENTERPRISE, LLC" />
   <meta property="og:description" content="Curated fashion resale from Gainesville, FL. Rare jerseys, designer bags, Stanley cups and shoes, handpicked by MissJaimmie and shipped across the US." />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content="https://treforged.github.io/missjaimmiescloset/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="A black Haddonfield baseball jersey with orange trim, from MissJaimmie's Closet" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://treforged.github.io/missjaimmiescloset/og-image.jpg" />
+  <meta name="twitter:image:alt" content="A black Haddonfield baseball jersey with orange trim, from MissJaimmie's Closet" />
   <meta name="twitter:title" content="MissJaimmie's Closet – SIBREY ENTERPRISE, LLC" />
   <meta name="twitter:description" content="Curated fashion resale from Gainesville, FL. Rare jerseys, designer bags, Stanley cups and shoes, handpicked by MissJaimmie and shipped across the US." />
 
