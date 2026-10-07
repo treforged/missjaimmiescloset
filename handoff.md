@@ -195,7 +195,9 @@ reachable and 0 items under the nav bar. Positive controls green in the same run
 
 ## Resume queue
 
-**FIRST UP NEXT TIME, one thing:** nothing, unless Tre says the DNS is moved.
+**FIRST UP NEXT TIME, one thing (2026-10-07):** ask `a81a5fb7` - port the 3 Stripe/ElevenLabs patterns and 2 tests from `~/.claude/bin/secret-scan/` into `scripts/secret-scan.mjs`, run `node --test scripts/secret-scan.test.mjs`, prove red, commit. Not started on 10-07 because the 5h cap read 97% at session start. DNS re-read 10-07 00:50 ET: apex still `199.34.228.66` (http 301), last activation run `37550325755` green = not yet.
+
+Previously: nothing, unless Tre says the DNS is moved.
 The activation is now **automatic** - `.github/workflows/activate-custom-domain.yml`
 watches the apex and commits `/CNAME` itself the moment
 `missjaimmiescloset.com` resolves to the four GitHub Pages addresses. There is
