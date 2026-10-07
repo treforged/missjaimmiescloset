@@ -195,6 +195,8 @@ reachable and 0 items under the nav bar. Positive controls green in the same run
 
 ## Resume queue
 
+**og:image SHIPPED 2026-10-07 (ask 10b83d09, b809b1c):** `og-image.jpg` is her Poshmark Haddonfield-jersey photo padded to 1200x630 in its own #F6F6F6 background; tags og:image/type/width/height/alt + twitter:card=summary_large_image + twitter:image. URL is github.io on purpose (domain still Weebly; github.io redirects after cutover). Live: 200 image/jpeg 42,967 B, sha256 identical to the commit; `check-share-card.mjs` now asserts the image and was proven red twice. If she sells that jersey the photo still stands as a brand image; swap the file only if she asks.
+
 **FIRST UP NEXT TIME (2026-10-07):** nothing, unless Tre says the DNS is moved. Secret-scan port `a81a5fb7` DONE 10-07: Stripe secret/restricted, Stripe webhook and ElevenLabs rules plus 2 tests, `scripts/secret-scan*.mjs` now sha256-identical to `~/.claude/bin/secret-scan/`; old scanner proven red (returned `[]` for `sk_live_`), ported one 15/15 green. DNS re-read 10-07 00:50 ET: apex still `199.34.228.66` (http 301), last activation run `37550325755` green = not yet.
 
 Previously: nothing, unless Tre says the DNS is moved.
@@ -362,7 +364,7 @@ Measured 2026-09-16, and this is the state the whole desk turns on:
 <!-- AUTO-SNAPSHOT:BEGIN - machine-written, replaced each compaction -->
 ## Auto-snapshot
 
-_Written 2026-10-07 01:01 by handoff_hook. Everything below this heading is
+_Written 2026-10-07 02:05 by handoff_hook. Everything below this heading is
 machine-generated and replaced each time; put durable notes above it._
 
 - **Branch:** `main`
@@ -373,6 +375,7 @@ machine-generated and replaced each time; put durable notes above it._
 - **Recent commits:**
 
 ```
+9d59e13 fix: secret scan refuses Stripe and ElevenLabs keys
 8eb56e8 docs: park secret-scan port as first up, record 10-07 DNS re-read
 39b995d docs: record the Vinted shop and the three places a new shop must go
 8b6abfd fix: shipping copy names Vinted alongside Poshmark and eBay
@@ -380,7 +383,6 @@ machine-generated and replaced each time; put durable notes above it._
 3e58295 docs: record the structured data and fold the favicon into the image decision
 86b2581 feat: structured data, so search engines can show the closet properly
 0831686 docs: record the share card, the og:image question, and the eBay negative
-9cca0b7 feat: sharing the link now produces a readable card, not a bare grey URL
 ```
 
 <!-- AUTO-SNAPSHOT:END -->
