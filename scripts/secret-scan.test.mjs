@@ -27,6 +27,20 @@ test("a GitHub token, a Groq key, an AWS id and a Slack token are all refused", 
   assert.equal(scanContent("a", "xoxb-" + "1234567890abcdef").length, 1);
 });
 
+test("Stripe secret, restricted and webhook keys and an ElevenLabs key are refused", () => {
+  // The 2026-10-06 gap: a staged Stripe live key committed clean.
+  assert.deepEqual(scanContent("a", key("sk_" + "live_", 24)).map((f) => f.kind), ["Stripe secret key"]);
+  assert.deepEqual(scanContent("a", key("sk_" + "test_", 24)).map((f) => f.kind), ["Stripe secret key"]);
+  assert.deepEqual(scanContent("a", key("rk_" + "live_", 24)).map((f) => f.kind), ["Stripe secret key"]);
+  assert.deepEqual(scanContent("a", key("whsec_", 32)).map((f) => f.kind), ["Stripe webhook secret"]);
+  assert.deepEqual(scanContent("a", "sk_" + "0a1b2c3d4e5f".repeat(4)).map((f) => f.kind), ["ElevenLabs key"]);
+});
+
+test("a Stripe PUBLISHABLE key and ordinary snake_case are NOT refused", () => {
+  assert.equal(scanContent("a", key("pk_" + "live_", 24)).length, 0);
+  assert.equal(scanContent("a", "const task_live_status = desk_test_runner;").length, 0);
+});
+
 test("a PEM private key block is refused", () => {
   assert.equal(scanContent("a", DASH5 + "BEGIN RSA PRIVATE KEY" + DASH5).length, 1);
   assert.equal(scanContent("a", DASH5 + "BEGIN PRIVATE KEY" + DASH5).length, 1);
