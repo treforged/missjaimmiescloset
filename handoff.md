@@ -1,3 +1,5 @@
+**FIRST UP NEXT TIME (2026-10-16, Iris):** DNS route found: Weebly-bought domain, so the edit is in the Square Dashboard (Channels > Domains > Manage > DNS Records), nameservers are register.com's by Square default. `_tools/CUTOVER.md` corrected and pushed. Asks 5034e9de and 02e73aef are blocked on Tre saving that edit; Sam opened the Square tab for him and will redispatch Iris. On redispatch: run `_tools/verify-domain.ps1`, then close both asks with its output.
+
 # Handoff — missjaimmiescloset.com
 
 Snapshot of what is true right now. Read in full at session start; keep it a
@@ -360,29 +362,3 @@ Measured 2026-09-16, and this is the state the whole desk turns on:
   was removed rather than answered. Undo: `git rm CNAME` and a push.
 - [ ] **Nothing else queued.** The accessibility backlog is cleared, and the
   layout and secret gates above are new since it was.
-
-<!-- AUTO-SNAPSHOT:BEGIN - machine-written, replaced each compaction -->
-## Auto-snapshot
-
-_Written 2026-10-07 02:05 by handoff_hook. Everything below this heading is
-machine-generated and replaced each time; put durable notes above it._
-
-- **Branch:** `main`
-- **vs upstream:** 0 ahead, 0 behind
-
-- **Working tree:** clean
-
-- **Recent commits:**
-
-```
-9d59e13 fix: secret scan refuses Stripe and ElevenLabs keys
-8eb56e8 docs: park secret-scan port as first up, record 10-07 DNS re-read
-39b995d docs: record the Vinted shop and the three places a new shop must go
-8b6abfd fix: shipping copy names Vinted alongside Poshmark and eBay
-6f62aa2 feat: add her Vinted shop as a third place to buy
-3e58295 docs: record the structured data and fold the favicon into the image decision
-86b2581 feat: structured data, so search engines can show the closet properly
-0831686 docs: record the share card, the og:image question, and the eBay negative
-```
-
-<!-- AUTO-SNAPSHOT:END -->
