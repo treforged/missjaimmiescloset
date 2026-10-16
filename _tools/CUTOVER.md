@@ -7,8 +7,21 @@ produced each figure are named so any of it can be re-run.
 
 ## The one action
 
-At **register.com** → sign in → **My Domains** → `missjaimmiescloset.com` →
-**Manage DNS** (also labelled *Advanced DNS* or *Edit DNS Zone*).
+**CORRECTION 2026-10-16 (Tre: the domain "was set up with Weebly").** Do NOT look for a
+register.com login. The nameservers are register.com's (measured: `dns019.a/173.b/215.c/176.d.register.com`)
+because that is Square's default for domains bought through Weebly, so the DNS is edited in the
+**Square Dashboard**, signed in with the Weebly/Square account that bought the domain:
+
+**Square Dashboard → Channels → Domains → `missjaimmiescloset.com` → Manage → Manage domain →
+DNS Records** → *Add DNS record* / *Edit* (edit or delete) → **Save**.
+Source: [Square: Manage records for Square Online domains](https://squareup.com/help/us/en/article/6962-manage-dns-records).
+(Older Weebly path: Weebly dashboard → Website → Domains → Manage → Manage Domain.)
+If the page offers "set to default" for nameservers, the nameservers are not Square's and
+the records must be edited at the third party instead. Leave the nameservers alone.
+The row list below is unchanged. Wording on that screen is from Square's docs, not seen
+with Tre's login (open item 1 under "What could NOT be verified").
+
+(Old text, kept: at register.com → My Domains → Manage DNS, if Tre has a direct register.com account.)
 
 ### Delete these two rows
 
