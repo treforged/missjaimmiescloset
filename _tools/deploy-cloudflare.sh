@@ -7,4 +7,5 @@ cd "$(dirname "$0")/.."
 stage="$(mktemp -d)"
 cp index.html og-image.jpg "$stage"/
 [ "${1:-}" = "--stage-only" ] && { ls -l "$stage"; exit 0; }
-npx --yes wrangler@4 pages deploy "$stage" --project-name missjaimmiescloset --branch main
+# `pages project create` made a Worker, so deploy as a Worker. NEVER point --assets at the repo root (it published handoff.md on 10-17).
+npx --yes wrangler@4 deploy --name missjaimmiescloset --assets "$stage" --compatibility-date 2026-10-12
