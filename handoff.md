@@ -1,3 +1,5 @@
+**FIRST UP NEXT TIME (2026-10-16 late, Iris):** ask ae2b69b0 slice 1 pushed: `_tools/CLOUDFLARE-MOVE.md` + `_tools/deploy-cloudflare.sh` (Cloudflare Pages direct upload; source stays on GitHub as backup, Sam approved, delete nothing). On redispatch, once Tre has done `wrangler login`/token and the Square DNS step: run `bash _tools/deploy-cloudflare.sh` (pages.dev), then `_tools/verify-domain.ps1`, close asks db52da5f 7352e20c 830edc07 02e73aef 5034e9de ae2b69b0 with output, retire `activate-custom-domain.yml`. Ask 308f419d (Quo phone number): 0 phone-shaped strings in tree, history or live page; reported to Sam.
+
 **FIRST UP NEXT TIME (2026-10-16, Iris):** DNS route found: Weebly-bought domain, so the edit is in the Square Dashboard (Channels > Domains > Manage > DNS Records), nameservers are register.com's by Square default. `_tools/CUTOVER.md` corrected and pushed. Asks 5034e9de and 02e73aef are blocked on Tre saving that edit; Sam opened the Square tab for him and will redispatch Iris. On redispatch: run `_tools/verify-domain.ps1`, then close both asks with its output.
 
 # Handoff — missjaimmiescloset.com
