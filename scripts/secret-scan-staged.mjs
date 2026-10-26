@@ -36,9 +36,11 @@ let staged;
 try {
   // ACR: added, copied, renamed, modified. A DELETION stages no content and
   // cannot leak anything, so it is excluded rather than read and skipped.
-  staged = git("diff", "--cached", "--name-only", "--diff-filter=ACMR")
-    .split("\n")
-    .map((s) => s.trim())
+  // -z (NUL-separated, never quoted): without it git prints a non-ASCII path as a quoted octal escape,
+  // `git show :<that>` then fails, the content was treated as empty and the file passed clean
+  // (audit 2026-10-26, reproduced with a real key in a file named cafe-with-an-accent).
+  staged = git("diff", "--cached", "--name-only", "-z", "--diff-filter=ACMR")
+    .split("\0")
     .filter(Boolean);
 } catch (err) {
   console.error(`secret-scan: could not read the staged list - ${err.message}`);

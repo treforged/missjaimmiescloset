@@ -154,3 +154,33 @@ test("a Mistral-shaped value is NOT caught by content, and the filename rule cov
     "the filename rule is what covers it instead",
   );
 });
+
+test("a real key on a line that merely mentions fake, ... or <x> is still refused", () => {
+  assert.equal(scanContent("a", `token = "${key("gsk_", 36)}"  # not a fake, trust me ...`).length, 1);
+  assert.equal(scanContent("a", `<b> ${key("ghp_", 36)} </b>`).length, 1);
+});
+
+test("a placeholder INSIDE the value is still allowed", () => {
+  assert.equal(scanContent("a", "GROQ=gsk_" + "x".repeat(40)).length, 0);
+  assert.equal(scanContent("a", "ghp_" + "EXAMPLE".repeat(6)).length, 0);
+  assert.equal(scanContent("a", "export KEY=" + key("sk-ant-") + " # EXAMPLE").length, 0, "a strong comment marker still excuses the line");
+});
+
+import { execFileSync, spawnSync } from "node:child_process";
+import { mkdtempSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+test("a key in a file with a NON-ASCII name is refused by the staged scan (-z)", () => {
+  const dir = mkdtempSync(join(tmpdir(), "zscan-"));
+  execFileSync("git", ["-C", dir, "init", "-q"]);
+  writeFileSync(join(dir, "caf\u00e9.txt"), `k = "${key("ghp_", 36)}"\n`);
+  execFileSync("git", ["-C", dir, "add", "."]);
+  const script = join(dirname(fileURLToPath(import.meta.url)), "secret-scan-staged.mjs");
+  const r = spawnSync("node", [script, "--repo", dir], { encoding: "utf8" });
+  assert.equal(r.status, 1, `expected a refusal, got ${r.status}: ${r.stdout}${r.stderr}`);
+  // exit 1 alone is vacuous: a missing or crashing script also exits 1. Require the refusal itself.
+  assert.match(r.stderr, /REFUSED - 1 credential-shaped item/);
+  assert.match(r.stderr, /\[GitHub token\]/);
+});

@@ -92,6 +92,8 @@ const NAME_PATTERNS = [
  * file it lives in, because "this file is documentation" is exactly the excuse a
  * real leak would hide behind.
  */
+const STRONG_MARKER = /YOUR[_ -]?|EXAMPLE|PLACEHOLDER|REDACTED/i;
+const WEAK_MARKER = /\.\.\.|<[^>]*>|xxx+|\bfake\b|\bdummy\b/i;
 const PLACEHOLDER = /\.\.\.|<[^>]*>|xxx+|YOUR[_ -]?|EXAMPLE|PLACEHOLDER|REDACTED|\bfake\b|\bdummy\b/i;
 
 export function scanContent(path, text) {
@@ -104,8 +106,15 @@ export function scanContent(path, text) {
   const lines = String(text ?? "").split("\n");
   lines.forEach((line, i) => {
     for (const p of VALUE_PATTERNS) {
-      if (!p.re.test(line)) continue;
-      if (PLACEHOLDER.test(line)) continue;
+      const m = line.match(p.re);
+      if (!m) continue;
+      // Test the MATCHED VALUE, not the whole line (audit 2026-10-26): a real key on a line that also
+      // says "fake", "..." or "<x>" used to pass. A placeholder must be part of the value itself.
+      // Two tiers. A STRONG marker anywhere on the line (an explicit EXAMPLE / PLACEHOLDER / REDACTED /
+      // YOUR_ comment, which the documented-example tests rely on) still excuses the line. A WEAK marker
+      // (an ellipsis, <x>, xxx, the word fake or dummy) excuses it only inside the value or touching its end (a
+      // truncation "...").
+      if (STRONG_MARKER.test(line) || WEAK_MARKER.test(line.slice(m.index, m.index + m[0].length + 4))) continue;
       findings.push({ path, line: i + 1, kind: p.name, why: "credential-shaped value in staged content" });
     }
   });
