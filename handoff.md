@@ -355,9 +355,9 @@ Measured 2026-09-16, and this is the state the whole desk turns on:
   access. Recommended path is editing A/CNAME rows at register.com rather than
   a nameserver move to Cloudflare: two minutes, zero email risk, and Cloudflare
   can still follow later on its own.
-- [ ] **Waiting on Tre only: the DNS edit.** Do not touch DNS and do not chase
+- [ ] **Waiting on Tre only: the DNS edit.** Do not touch DNS and do not chase [tracked: asks 5034e9de, fcdd6546 (now waits on Square support, not Tre)]
   him. Everything on this side is done and proven.
-- [~] **Still unexercised, but materially de-risked 2026-09-22 (`5b67397`).**
+- [~] **Still unexercised, but materially de-risked 2026-09-22 (`5b67397`).** [tracked: ask bad11323]
   The push cannot truly run until DNS moves. What WAS found and fixed: from a
   detached HEAD `git push origin main` **exits 0 and pushes nothing**, measured
   in a throwaway repo - so the job could have gone green, printed "Activated",
@@ -368,5 +368,5 @@ Measured 2026-09-16, and this is the state the whole desk turns on:
   **NOT verified: whether actions/checkout leaves the runner detached.** Run
   logs need admin auth and gh's token here is invalid (HTTP 403). The question
   was removed rather than answered. Undo: `git rm CNAME` and a push.
-- [ ] **Nothing else queued.** The accessibility backlog is cleared, and the
+- [x] **Nothing else queued.** The accessibility backlog is cleared, and the [closed 10-26 by Sam (ask 3206cb31): a status statement, not work. ask list shows only DNS rows 5034e9de/fcdd6546 plus bad11323.]
   layout and secret gates above are new since it was.
